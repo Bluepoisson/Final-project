@@ -1,0 +1,37 @@
+.container_clinics_list {
+	box-sizing: border-box;
+	font-family: 'Muli', sans-serif;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	overflow: hidden;
+	margin: 0;
+	position: absolute;
+	transform-style: preserve-3d;
+	perspective: 500px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.clinic_wrapper {
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+	border-radius: 15px;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(5px);
+	transform-style: preserve-3d;
+	/* background-color: rgba(0, 0, 0, 0.4); */
+	padding: 20px 40px;
+	border-radius: 10px;
+}
+
+.clinics_details p {
+	color: #fff;
+	font-weight: 300;
+	@media (max-width: 500px) {
+		font-size: 0.75rem;
+	}
+}

@@ -1,0 +1,39 @@
+.banner {
+	display: flex;
+	flex-wrap: wrap;
+	border-radius: 15px;
+	background: #2196f3;
+	padding: 20px 40px;
+	border-radius: 5px;
+	justify-content: left;
+	align-items: center;
+}
+
+.title {
+	font-weight: bold;
+	color: #fff;
+	font-size: 52px;
+}
+
+.logo {
+	position: relative;
+	height: 90px;
+	width: 90px;
+}
+
+/* img {
+	position: absolute;
+	margin: -10px 0 0 155px;
+	height: 400px;
+	width: 380px;
+	border-radius: 50%;
+} */
+
+.banner-img {
+	position: absolute;
+	height: 300px;
+	width: 300px;
+	border-radius: 50%;
+	top: 50px;
+	left: 15px;
+}
