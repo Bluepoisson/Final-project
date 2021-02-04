@@ -5,7 +5,7 @@ import  './clinicsListStyles.css';
 
 const ClinicsList = () => {
   const { place_id } = useParams();
-  const API_KEY = "AIzaSyACJfjPuQmyXP6d7nzc2THb5Vo942xw1JE";
+  const API_KEY = process.env.GOOGLE_API_KEY;
   const PLACES_DETAILS_URL = `https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJCVKnQkOhU0YRctd2LNO0GT8&fields=name,rating,formatted_address,formatted_phone_number,opening_hours&key=${API_KEY}`
   const [clinicsList, setClinicsList] = useState([]);  // stores clinicList
 

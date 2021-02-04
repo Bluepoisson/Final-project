@@ -91,7 +91,7 @@ const onMarkerDragEnd = (e) => {
    
 <>     
       <LoadScript  
-      googleMapsApiKey= "AIzaSyACJfjPuQmyXP6d7nzc2THb5Vo942xw1JE" >
+      googleMapsApiKey={process.env.GOOGLE_API_KEY} >
    
          {/* <Search3 /> */}
       <GoogleMap

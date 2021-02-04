@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyACJfjPuQmyXP6d7nzc2THb5Vo942xw1JE";
+
 
 const PLACES_URL = `https://maps.googleapis.com/maps/api/place/details/json?placeid={place_id}&key=${API_KEY}`;
 
