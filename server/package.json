@@ -1,0 +1,41 @@
+{
+  "name": "sickadvisor-server",
+  "version": "1.0.0",
+  "description": "Map app",
+  "repository": "https://github.com/Bluepoisson/Final-project.git",
+  "scripts": {
+    "start": "babel-node server.mjs",
+    "dev": "nodemon server.mjs --exec babel-node",
+    "troll": "echo $HERO"
+  },
+  "author": "Nadia Mazzoni",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.8.3",
+    "@babel/helper-compilation-targets": "^7.8.3",
+    "@babel/node": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "babel-node": "0.0.1-security",
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dep": "^0.18.3",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "express": "^4.17.1",
+    "express-list-endpoints": "^5.0.0",
+    "install": "^0.13.0",
+    "mongoose": "^5.11.13",
+    "nodemon": "^2.0.2",
+    "npm": "^6.14.11",
+    "save": "^2.4.0"
+  },
+  "devDependencies": {
+    "dotenv": "*",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-import": "^0.13.0"
+  }
+}
