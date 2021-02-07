@@ -10,6 +10,9 @@ import listEndpoints from 'express-list-endpoints';
 // dotenv.config();
 // console.log("Our hero is:" + process.env.HERO);
 
+
+
+
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProject';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('useCreateIndex', true);
@@ -66,13 +69,11 @@ const authenticateUser = async (req, res, next) => {
 //! google review details?
 
 const Review =  mongoose.model('Review', {
-    author: { 
-        type: String,
-        unique: true,
-        minLength: 3,
-        maxLength: 20
-    },
-    text: {
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+    description: {
         type: String,
         required: true,
         minlength: [5, "Review must be at least 5 characters"],
@@ -169,28 +170,6 @@ app.get('/users/:id', (req, res) => {
 });
 
 
-// // Get user specific information
-// app.get('/users/:id/profile', authenticateUser);
-// app.get('/users/:id/profile', async (req, res) => {
-//   const user = await User.findOne({ _id: req.params.id });
-//   const publicProfileMessage = `This is a public profile message for ${user.email}`;
-//   const privateProfileMessage = `This is a private profile message for ${user.email}`;
-
-//   console.log(`Authenticated req.user._id: '${req.user._id.$oid}'`);
-//   console.log(`Requested     user._id    : '${user._id}'`);
-//   console.log(`Equal   : ${req.user_id == user._id}`);
-
-//   // Decide private or public here
-//   if (req.user._id.$oid === user._id.$oid) {
-//     // Private
-//     res.status(200).json({ profileMessage: privateProfileMessage });
-//   } else {
-//     // Public information or Forbidden (403) because the users don't match
-//     res.status(200).json({ profileMessage: publicProfileMessage });
-//   }
-// });
-
-
 app.get('/reviews', async (req, res) => {
     try {
     const reviews = await Review.find()
@@ -204,8 +183,8 @@ app.get('/reviews', async (req, res) => {
   });
   
   app.post('/reviews', async (req, res) => {
-    const { message, email } = req.body;
-    const review = new Review({ message, email });
+    const { description, email } = req.body;
+    const review = new Review({ description, email });
   
     try {
       const savedReview = await review.save();
