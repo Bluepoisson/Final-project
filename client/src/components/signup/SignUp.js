@@ -9,7 +9,7 @@ import BackArrow from '../lib/BackArrow';
   const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState("")
-	const [signedUp, setSignedUp] = useState(false)
+	const [setSignedUp] = useState(false)
   const history = useHistory()
 
 

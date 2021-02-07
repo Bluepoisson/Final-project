@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { user } from '../reducers/user'
+import  Reviews  from '../survey/testimonials/Reviews'
 
 import './profileStyles.css';
 
@@ -13,7 +14,7 @@ const Profile = () => {
   const accessToken = useSelector((store) => store.user.login.accessToken)
   const userId = useSelector((store) => store.user.login.userId)
   const secretMessage = useSelector((store) => store.user.login.secretMessage);
-  const statusMessage = useSelector((store) => store.user.login.statusMessage);
+  // const statusMessage = useSelector((store) => store.user.login.statusMessage);
 
   const PROFILE_URL = `http://localhost:8080/users/${userId}`;
  
@@ -67,10 +68,12 @@ const Profile = () => {
         <h4>userId:</h4>
         <p> {`${userId}`}</p>
         <p>This is the profile</p>
+        <p>{secretMessage}</p>
+      <button className="btn-secret" type="submit" onClick={showSecret} value="Secret" />
+      <button className="btn-logout" type="submit" onClick={handleLogout} value="Logout" />
+      <Reviews />
       </div>
-      <button className="btn" type="submit" onClick={showSecret} value="Secret" />
-      <p>{secretMessage}</p>
-      <button type="submit" onClick={handleLogout} value="Logout" />
+     
   </>
     )
 };

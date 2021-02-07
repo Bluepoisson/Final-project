@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-
-import mapStyles from "./mapStyles";
-
-
+import { useHistory } from "react-router-dom"
+import Search from '../search/Search'
 
 const MapContainer = () => {
-  
+  const history = useHistory()
+
   const mapStyles = {        
     height: "100vh",
     width: "100%"};
@@ -64,8 +63,8 @@ const MapContainer = () => {
   }
 
 //? dynamically showing marker geolocation api
-const [ currentPosition, setCurrentPosition ] = useState({});
-  
+const [ setCurrentPosition ] = useState({});
+
 const success = position => {
   const currentPosition = {
     lat: position.coords.latitude,
@@ -78,22 +77,25 @@ useEffect(() => {
   navigator.geolocation.getCurrentPosition(success);
 })
 
+const reDirect = () => {
+  history.push(`/clinics`)
+}
+
 //? draggable marker 
-const onMarkerDragEnd = (e) => {
-  const lat = e.latLng.lat();
-  const lng = e.latLng.lng();
-  setCurrentPosition({ lat, lng})
-};
+// const onMarkerDragEnd = (e) => {
+//   const lat = e.latLng.lat();
+//   const lng = e.latLng.lng();
+//   setCurrentPosition({ lat, lng})
+// };
 
 // const API_KEY = `process.env.GOOGLE_API_KEY`; 
   
   return (
    
 <>     
-      <LoadScript  
-      googleMapsApiKey={process.env.GOOGLE_API_KEY} >
    
-         {/* <Search3 /> */}
+      <LoadScript  
+      googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY} >  
       <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={13}

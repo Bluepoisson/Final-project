@@ -11,19 +11,6 @@ import Profile from './../profile/Profile';
 import BackArrow from '../lib/BackArrow';
 
 
-//! animation
-// const labels = document.querySelectorAll('.form-control label')
-//     labels.forEach(label => {
-//       label.innerHTML = label.innerText
-//         .split('')
-//         .map((letter, i) => `<span 
-//         style="transition-delay:
-//         ${i * 50}ms">
-//         ${letter}</span>`)
-//         .join('')
-//     });
-
-
 // const SIGNUP_URL = 'http://localhost:8080/users';
 const LOGIN_URL = 'http://localhost:8080/sessions';
 

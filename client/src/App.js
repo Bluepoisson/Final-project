@@ -5,6 +5,11 @@ import { Provider } from "react-redux";
 
 import StartPage from './pages/startpage/StartPage'
 import MapContainer from './components/map/MapContainer';
+// import Search from './components/search/Search';
+import { ClinicsCard }from './components/clinics/ClinicsCard';
+// import  ClinicsList from './components/clinics/ClinicsList';
+
+
 
 
 
@@ -13,7 +18,7 @@ import MapContainer from './components/map/MapContainer';
 import LoginForm  from "./components/login/LoginForm";
 import SignupForm  from "./components/signup/SignUp";
 // import { Header } from "./components/header/Header";
-import ClinicsList from "./components/clinics/ClinicsList"
+// import ClinicsList from "./components/clinics/ClinicsList"
 import  Profile  from "./components/profile/Profile";
 
 
@@ -36,9 +41,9 @@ export const App = () => {
             <Route exact path="/" component={StartPage} />
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/register" component={SignupForm} />
-            <Route exact path="/user" component={Profile} />
+            {/* <Route exact path="/user" component={Profile} /> */}
             <Route exact path="/map" component={MapContainer} />
-            <Route exact path="/clinics" component={ClinicsList} />
+            <Route exact path="/clinics" component={ClinicsCard} />
 
         </Switch>
         </main>
