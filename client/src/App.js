@@ -19,7 +19,9 @@ import LoginForm  from "./components/login/LoginForm";
 import SignupForm  from "./components/signup/SignUp";
 // import { Header } from "./components/header/Header";
 // import ClinicsList from "./components/clinics/ClinicsList"
-import  Profile  from "./components/profile/Profile";
+// import  Profile  from "./components/profile/Profile";
+
+import ReviewForm  from "./components/survey/ReviewForm";
 
 
 import { user } from "./components/reducers/user";
@@ -41,7 +43,7 @@ export const App = () => {
             <Route exact path="/" component={StartPage} />
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/register" component={SignupForm} />
-            {/* <Route exact path="/user" component={Profile} /> */}
+            <Route exact path="/review" component={ReviewForm} />
             <Route exact path="/map" component={MapContainer} />
             <Route exact path="/clinics" component={ClinicsCard} />
 
