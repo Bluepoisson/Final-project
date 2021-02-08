@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import './reviewForm.css'
 
 const ReviewForm = () => {
 
   const [clinic, setClinic] = useState([]);
   const [waitingTime, setWaitingTime] = useState([]);
   const [needs, setNeeds] = useState('');
+
 
 
   const handleClinicChange = newClinic => {
@@ -33,7 +34,7 @@ const ReviewForm = () => {
     
     return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form classname="review" onSubmit={handleSubmit}>
       <h3 className="question-header" tabIndex="0"> Which clinic are your reviewing?</h3>
        <select aria-label="clinic_name" tabIndex="0"  name="Clinics" required>
           <option value="Vårdcentralen Södervärn">Vårdcentralen Södervärn</option>

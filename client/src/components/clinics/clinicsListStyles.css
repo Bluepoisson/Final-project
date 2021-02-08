@@ -28,7 +28,8 @@
 	border-radius: 10px;
 }
 
-.clinics_details p {
+.clinics_details {
+	font-size: 18px;
 	color: #fff;
 	font-weight: 300;
 	@media (max-width: 500px) {

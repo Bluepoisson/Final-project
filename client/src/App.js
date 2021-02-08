@@ -6,8 +6,8 @@ import { Provider } from "react-redux";
 import StartPage from './pages/startpage/StartPage'
 import MapContainer from './components/map/MapContainer';
 // import Search from './components/search/Search';
-import { ClinicsCard }from './components/clinics/ClinicsCard';
-// import  ClinicsList from './components/clinics/ClinicsList';
+// import { ClinicsCard }from './components/clinics/ClinicsCard';
+// import ClinicsList from './components/clinics/ClinicsList';
 
 
 
@@ -18,7 +18,7 @@ import { ClinicsCard }from './components/clinics/ClinicsCard';
 import LoginForm  from "./components/login/LoginForm";
 import SignupForm  from "./components/signup/SignUp";
 // import { Header } from "./components/header/Header";
-// import ClinicsList from "./components/clinics/ClinicsList"
+import ClinicsList from "./components/clinics/ClinicsList"
 // import  Profile  from "./components/profile/Profile";
 
 import ReviewForm  from "./components/survey/ReviewForm";
@@ -42,10 +42,14 @@ export const App = () => {
         <Switch>
             <Route exact path="/" component={StartPage} />
             <Route exact path="/login" component={LoginForm} />
-            <Route exact path="/register" component={SignupForm} />
+     
             <Route exact path="/review" component={ReviewForm} />
             <Route exact path="/map" component={MapContainer} />
-            <Route exact path="/clinics" component={ClinicsCard} />
+            <Route exact path="/clinics" component={ClinicsList}/>
+           <Route exact path="/register" component={SignupForm} />
+
+           
+            
 
         </Switch>
         </main>
