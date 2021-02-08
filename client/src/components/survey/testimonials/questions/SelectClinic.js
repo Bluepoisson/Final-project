@@ -57,7 +57,6 @@ export default function App() {
 
       <input name="Developer" type="radio" value="Yes" ref={register({ required: true })}/>
       <input name="Developer" type="radio" value="No" ref={register({ required: true })}/>
-
       <input type="submit" />
       </form>
   </>
