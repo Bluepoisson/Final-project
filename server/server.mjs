@@ -95,7 +95,7 @@ const reviewSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-    clinic_id: {
+    clinic: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Clinic',
         required: true
@@ -228,7 +228,7 @@ app.get('/clinics', async (req, res) => {
 //? single clinic endpoint
 app.get('/clinics/:id', async (req, res) => {
   try {
-  const clinicId = await Show.findOne({ show_id: req.params.id })
+  const clinicId = await Clinic.findOne({ clinic_id: req.params.id })
   if(clinicId) {
     res.json(clinicId)
   } else {
@@ -240,7 +240,6 @@ app.get('/clinics/:id', async (req, res) => {
 })
 
 app.post('/clinics', async (req, res) => {
-
     const { formatted_address, formatted_phone_number, name, rating } = req.body;
     const clinic = new Clinic({formatted_address, formatted_phone_number, name, rating });
     try {
@@ -252,8 +251,9 @@ app.post('/clinics', async (req, res) => {
 });
 
   app.post('/reviews/:clinicId', async (req, res) => {
-    const {clinicId } = req.params
-    const review = new Review({ clinicId, reception, timely, helpful, recommendation, createdAt });
+    const { clinicId } = req.params
+    const { reception, timely, helpful, recommendation, createdAt } = req.body
+    const review = new Review({ userId, clinicId, reception, timely, helpful, recommendation, createdAt });
     try {
       const savedReview = await review.save();
       res.status(200).json(savedReview);
