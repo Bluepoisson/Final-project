@@ -3,6 +3,7 @@ import  { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
+import { Routing } from './components/route/Routing'
 import StartPage from './pages/startpage/StartPage'
 import MapContainer from './components/map/MapContainer';
 // import Search from './components/search/Search';
@@ -40,13 +41,15 @@ export const App = () => {
        {/* <Header /> */}
        <main>
         <Switch>
-            <Route exact path="/" component={StartPage} />
+
+          <Routing />
+            {/* <Route exact path="/" component={StartPage} />
             <Route exact path="/login" component={LoginForm} />
      
             <Route exact path="/review" component={ReviewForm} />
             <Route exact path="/map" component={MapContainer} />
             <Route exact path="/clinics" component={ClinicsList}/>
-           <Route exact path="/register" component={SignupForm} />
+           <Route exact path="/register" component={SignupForm} /> */}
 
            
             
