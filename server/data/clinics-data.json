@@ -1,21 +1,21 @@
 [
-{
-     "formatted_address" : "Ruth Lundskogs gata 4, 205 02 Malmö, Sverige",
-     "formatted_phone_number" : "040-623 43 30",
-     "name" : "Vårdcentralen Södervärn",
-     "opening_hours" : {
-        "weekday_text" : [
-           "måndag: 08:00–17:00",
-           "tisdag: 08:00–17:00",
-           "onsdag: 08:00–17:00",
-           "torsdag: 08:00–17:00",
-           "fredag: 08:00–17:00",
-           "lördag: Stängt",
-           "söndag: Stängt"
-        ]
-     },
-     "rating" : 2.5
-  },
+   {
+      "formatted_address" : "Ruth Lundskogs gata 4, 205 02 Malmö, Sverige",
+      "formatted_phone_number" : "040-623 43 30",
+      "name" : "Vårdcentralen Södervärn",
+      "opening_hours" : {
+         "weekday_text" : [
+            "måndag: 08:00–17:00",
+            "tisdag: 08:00–17:00",
+            "onsdag: 08:00–17:00",
+            "torsdag: 08:00–17:00",
+            "fredag: 08:00–17:00",
+            "lördag: Stängt",
+            "söndag: Stängt"
+         ]
+      },
+      "rating" : 2.5
+   },
 {
       "formatted_address" : "Spårvägsgatan 6, 214 27 Malmö, Sverige",
       "formatted_phone_number" : "040-19 00 13",

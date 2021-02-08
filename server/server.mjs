@@ -13,6 +13,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const clinicsData = require('./data/clinics-data.json');
 
+
 // dotenv.config();
 // console.log("Our hero is:" + process.env.HERO);
 
@@ -72,9 +73,7 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
-
-const Clinic = mongoose.model('Clinic', {
-
+const clinicSchema = new mongoose.Schema({
   formatted_address: {
     type: String
   },
@@ -84,18 +83,13 @@ const Clinic = mongoose.model('Clinic', {
   name: { 
     type: String
   },
-  weekday_text: {
-    type: String
-  },
   rating:{
     type: Number
   }
   
 });
 
-//! google review details?
-
-const Review =  mongoose.model('Review', {
+const reviewSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -120,11 +114,13 @@ const Review =  mongoose.model('Review', {
     createdAt: {
         type: Date,
         default: Date.now
-    },
+    }
 });
 
 
 const User = mongoose.model('User', userSchema);
+const Clinic = mongoose.model('Clinic', clinicSchema);
+const Review = mongoose.model('Review', reviewSchema);
 
 if (process.env.RESET_DATABASE) {
   console.log('Resetting database!');
@@ -141,7 +137,6 @@ if (process.env.RESET_DATABASE) {
   }
   seedDatabase();
 }
-
 
 
 //   PORT=9000 npm start
@@ -238,18 +233,21 @@ app.get('/clinics/:id', async (req, res) => {
 }
 })
 
+app.post('/clinics', async (req, res) => {
 
-app.get('/reviews', async (req, res) => {
+    const { formatted_address, formatted_phone_number, name, rating } = req.body;
+    // const clinic = await Clinic.findOne({ name });
+    const clinic = new Clinic({formatted_address, formatted_phone_number, name, rating });
     try {
-    const reviews = await Review.find()
-        .sort({createdAt: 'desc'})
-        .limit(10)
-        .exec(); 
-        res.status(200).json(reviews);
+      const savedClinic = await clinic.save();
+      res.status(200).json(savedClinic);
     } catch (err) {
-      res.status(404).json({ message: 'Page not found', error: err.errors })
+      res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
     }
-  });
+});
+
+
+
   
   app.post('/reviews', async (req, res) => {
     const { user, name_of_clinic, question, createdAt } = req.body;
