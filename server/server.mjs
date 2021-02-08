@@ -7,6 +7,12 @@ import bcrypt from 'bcrypt';
 // import dotenv from 'dotenv';
 import listEndpoints from 'express-list-endpoints';
 
+import { createRequire } from 'module';
+
+//! could not import clinics-data from './data/clinics-data.json' because of type error json was not recognized. Deconstructing worked.
+const require = createRequire(import.meta.url);
+const clinicsData = require('./data/clinics-data.json');
+
 // dotenv.config();
 // console.log("Our hero is:" + process.env.HERO);
 
@@ -66,6 +72,27 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
+
+const Clinic = mongoose.model('Clinic', {
+
+  formatted_address: {
+    type: String
+  },
+  formatted_phone_number: {
+    type: Number
+  },
+  name: { 
+    type: String
+  },
+  weekday_text: {
+    type: String
+  },
+  rating:{
+    type: Number
+  }
+  
+});
+
 //! google review details?
 
 const Review =  mongoose.model('Review', {
@@ -73,11 +100,22 @@ const Review =  mongoose.model('Review', {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-    description: {
-        type: String,
-        required: true,
-        minlength: [5, "Review must be at least 5 characters"],
-        maxlength:  [200, "Review must be at most 200 characters"],
+    clinic_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Clinic',
+        required: true
+    },
+    question: {
+      type: String,
+    },
+    question: {
+      type: String,
+    },
+    question: {
+      type: String,
+    },
+    question: {
+      type: String,
     },
     createdAt: {
         type: Date,
@@ -94,8 +132,12 @@ if (process.env.RESET_DATABASE) {
   
   await User.deleteMany();
   await Review.deleteMany();
-  
+  await Clinic.deleteMany();
 
+  clinicsData.forEach(item => {
+    const newClinic = new Clinic(item);
+    newClinic.save();
+  })
   }
   seedDatabase();
 }
@@ -169,6 +211,33 @@ app.get('/users/:id', (req, res) => {
 
 });
 
+app.get('/clinics', async (req, res) => {
+  try {
+    const allClinics = await Clinic.find()
+      if(allClinics) { 
+      res.status(200).json(allClinics);
+      } else {
+        res.status(404).json({ error: 'Data not found' })
+      }
+      } catch (err) {
+        res.status(404).json({ message: 'Page not found', error: err.errors })
+      }
+});
+
+//? single clinic endpoint
+app.get('/clinics/:id', async (req, res) => {
+  try {
+  const clinicId = await Show.findOne({ show_id: req.params.id })
+  if(clinicId) {
+    res.json(clinicId)
+  } else {
+    res.status(404).json({ error: 'Clinic not found' })
+  }
+} catch (err) {
+  res.status(400).json({ error: 'Invalid clinic id' })
+}
+})
+
 
 app.get('/reviews', async (req, res) => {
     try {
@@ -183,8 +252,8 @@ app.get('/reviews', async (req, res) => {
   });
   
   app.post('/reviews', async (req, res) => {
-    const { description, email } = req.body;
-    const review = new Review({ description, email });
+    const { user, name_of_clinic, question, createdAt } = req.body;
+    const review = new Review({ user, name_of_clinic, question, createdAt });
   
     try {
       const savedReview = await review.save();
