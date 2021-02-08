@@ -92,23 +92,24 @@ const clinicSchema = new mongoose.Schema({
 const reviewSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
     clinic_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Clinic',
         required: true
     },
-    question: {
+    reception: {
       type: String,
     },
-    question: {
+    timely: {
       type: String,
     },
-    question: {
+    helpful: {
       type: String,
     },
-    question: {
+    recommendation: {
       type: String,
     },
     createdAt: {
@@ -133,6 +134,11 @@ if (process.env.RESET_DATABASE) {
   clinicsData.forEach(item => {
     const newClinic = new Clinic(item);
     newClinic.save();
+  })
+
+  reviewData.forEach(item => {
+    const newReview = new Review(item);
+    newReview.save();
   })
   }
   seedDatabase();
@@ -236,7 +242,6 @@ app.get('/clinics/:id', async (req, res) => {
 app.post('/clinics', async (req, res) => {
 
     const { formatted_address, formatted_phone_number, name, rating } = req.body;
-    // const clinic = await Clinic.findOne({ name });
     const clinic = new Clinic({formatted_address, formatted_phone_number, name, rating });
     try {
       const savedClinic = await clinic.save();
@@ -246,13 +251,9 @@ app.post('/clinics', async (req, res) => {
     }
 });
 
-
-
-  
-  app.post('/reviews', async (req, res) => {
-    const { user, name_of_clinic, question, createdAt } = req.body;
-    const review = new Review({ user, name_of_clinic, question, createdAt });
-  
+  app.post('/reviews/:clinicId', async (req, res) => {
+    const {clinicId } = req.params
+    const review = new Review({ clinicId, reception, timely, helpful, recommendation, createdAt });
     try {
       const savedReview = await review.save();
       res.status(200).json(savedReview);
@@ -260,6 +261,8 @@ app.post('/clinics', async (req, res) => {
       res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
     }
   });
+
+
 
 // Start the server
 app.listen(port, () => {
