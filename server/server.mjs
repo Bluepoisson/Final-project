@@ -200,7 +200,6 @@ app.post('/sessions', async (req, res) => {
   }
 });
 
-
 // app.get('/secret', authenticateUser);
 // app.get('/secret', (req, res) => {
 // 	const secretMessage = `This is a secret message for ${req.user.email}`;
@@ -218,25 +217,26 @@ app.get('/users/:id', (req, res) => {
 
 app.get('/clinics', async (req, res) => {
   const { name, opening_hours } = req.query;
-  const regExName = escapeStringRegexp(name);
-    
-
+  let allClinics = null;
   try {
-    // const allClinics = await Clinic.find(req.query).skip(2).limit(2);
-    let allClinics = await Clinic.find({ name: { $regex: regExName } });
-   
+    if(name){
+      const regExName = escapeStringRegexp(name);
+        allClinics = await Clinic.find({ name: { $regex: regExName } });
+    }  else if(opening_hours) {
+      const regExOpenHours = escapeStringRegexp(opening_hours);
+      allClinics = await Clinic.find({ opening_hours: { $regex: regExOpenHours } });
+    } else {
+      allClinics = await Clinic.find(req.query).skip(2).limit(2);
+    }
 
-
-      if(allClinics) { 
-      res.status(200).json(allClinics);
-      } else {
-        res.status(404).json({ error: 'Data not found' })
-      }
-      } catch (err) {
-        res.status(404).json({ message: 'Page not found', error: err.errors })
-      }
-
-
+    if(allClinics) { 
+    res.status(200).json(allClinics);
+    } else {
+      res.status(404).json({ error: 'Data not found' })
+    }
+    } catch (err) {
+      res.status(404).json({ message: 'Page not found', error: err.errors })
+    }
 });
 
 //? single clinic endpoint
@@ -254,9 +254,6 @@ app.get('/clinics/:id', async (req, res) => {
     }
   })
 
-
-
-
 app.post('/clinics', async (req, res) => {
     const { formatted_address, formatted_phone_number, name, opening_hours, rating } = req.body;
     const clinic = new Clinic({formatted_address, formatted_phone_number, name, opening_hours, rating });
@@ -267,7 +264,7 @@ app.post('/clinics', async (req, res) => {
       res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
     }
 });
-
+  app.post('/reviews/clinic/:id', authenticateUser);
   app.post('/reviews/clinic/:id', async (req, res) => {
     const { clinic } = req.params
     const { reception, timely, helpful, recommendation, createdAt } = req.body
