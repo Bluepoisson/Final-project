@@ -131,8 +131,8 @@ if (process.env.RESET_DATABASE) {
   console.log('Resetting database!');
   const seedDatabase = async () => {
   
-  await User.deleteMany();
-  await Review.deleteMany();
+  
+  // await Review.deleteMany();
   await Clinic.deleteMany();
 
   clinicsData.forEach(item => {
@@ -140,10 +140,10 @@ if (process.env.RESET_DATABASE) {
     newClinic.save();
   })
 
-  reviewData.forEach(item => {
-    const newReview = new Review(item);
-    newReview.save();
-  })
+  // reviewData.forEach(item => {
+  //   const newReview = new Review(item);
+  //   newReview.save();
+  // })
   }
   seedDatabase();
 }

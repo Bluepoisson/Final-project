@@ -1,7 +1,7 @@
 [
    {
       "formatted_address" : "Ruth Lundskogs gata 4, 205 02 Malmö, Sverige",
-      "formatted_phone_number" : "040-623 43 30",
+      "formatted_phone_number" : "46406234330",
       "name" : "Vårdcentralen Södervärn",
          "opening_hours" : [
             "måndag: 08:00–17:00",
@@ -17,7 +17,7 @@
    },
 {
       "formatted_address" : "Spårvägsgatan 6, 214 27 Malmö, Sverige",
-      "formatted_phone_number" : "040-19 00 13",
+      "formatted_phone_number" : "4640190013",
       "name" : "Möllevångs vårdcentral",
          "opening_hours" : [
             "måndag: 08:00–20:00",
@@ -32,10 +32,9 @@
    },
 {
       "formatted_address" : "Möllevångsgatan 44, 214 20 Malmö, Sverige",
-      "formatted_phone_number" : "040-623 91 00",
+      "formatted_phone_number" : "46406239100",
       "name" : "Vårdcentralen Eden",
-      "opening_hours" : {
-         "weekday_text" : [
+         "opening_hours" : [
             "måndag: 08:00–16:00",
             "tisdag: 08:00–16:00",
             "onsdag: 08:00–16:00",
@@ -43,16 +42,14 @@
             "fredag: 08:00–16:00",
             "lördag: Stängt",
             "söndag: Stängt"
-         ]
-      },
+         ],
       "rating" : 2.1
    },
 {
       "formatted_address" : "Fågelbacksgatan 13, 217 44 Malmö, Sverige",
-      "formatted_phone_number" : "040-623 49 00",
+      "formatted_phone_number" : "46406234900",
       "name" : "Vårdcentralen Fågelbacken",
-      "opening_hours" : {
-         "weekday_text" : [
+         "opening_hours" : [
             "måndag: 08:00–17:00",
             "tisdag: 08:00–17:00",
             "onsdag: 08:00–17:00",
@@ -60,16 +57,14 @@
             "fredag: 08:00–17:00",
             "lördag: Stängt",
             "söndag: Stängt"
-         ]
-      },
+         ],
       "rating" : 2.1
    },
 {
       "formatted_address" : "Studentgatan 1, 211 38 Malmö, Sverige",
-      "formatted_phone_number" : "040-35 09 00",
+      "formatted_phone_number" : "4640350900",
       "name" : "Capio Citykliniken Malmö Centrum",
-      "opening_hours" : {
-         "weekday_text" : [
+         "opening_hours" : [
             "måndag: 08:00–12:00, 13:00–17:00",
             "tisdag: 08:00–12:00, 13:00–17:00",
             "onsdag: 08:00–12:00, 13:00–17:00",
@@ -77,8 +72,7 @@
             "fredag: 08:00–12:00, 13:00–17:00",
             "lördag: Stängt",
             "söndag: Stängt"
-         ]
-      },
+         ],
       "rating" : 2.1
    }
 
