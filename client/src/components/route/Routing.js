@@ -5,7 +5,7 @@ import ReviewForm from '../survey/ReviewForm'
 import MapContainer from '../map/MapContainer'
 import ClinicsList from '../clinics/ClinicsList'
 
-import SignupForm from '../signup/SignUp'
+import LoginForm from '../login/LoginForm'
 
 
 export const Routing = () => {
@@ -21,7 +21,7 @@ export const Routing = () => {
 	  )}
 	  {!accessToken && (
 
-       <SignupForm />
+       <LoginForm />
    
     )}
     </div>
