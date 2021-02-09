@@ -81,7 +81,11 @@ const clinicSchema = new mongoose.Schema({
     type: Number
   },
   name: { 
-    type: String
+    type: String,
+    unique: true
+  },
+  opening_hours: {
+    type: Array,
   },
   rating:{
     type: Number
@@ -209,7 +213,6 @@ app.get('/users/:id', (req, res) => {
 	const secretMessage = `This is a secret message for ${req.user.name}`;
 	console.log(`SecretMessage in endpoint ${secretMessage}`);
 	res.status(200).json({ secretMessage });
-
 });
 
 app.get('/clinics', async (req, res) => {
@@ -240,8 +243,8 @@ app.get('/clinics/:id', async (req, res) => {
 })
 
 app.post('/clinics', async (req, res) => {
-    const { formatted_address, formatted_phone_number, name, rating } = req.body;
-    const clinic = new Clinic({formatted_address, formatted_phone_number, name, rating });
+    const { formatted_address, formatted_phone_number, name, opening_hours, rating } = req.body;
+    const clinic = new Clinic({formatted_address, formatted_phone_number, name, opening_hours, rating });
     try {
       const savedClinic = await clinic.save();
       res.status(200).json(savedClinic);
@@ -253,7 +256,7 @@ app.post('/clinics', async (req, res) => {
   app.post('/reviews/:clinicId', async (req, res) => {
     const { clinicId } = req.params
     const { reception, timely, helpful, recommendation, createdAt } = req.body
-    const review = new Review({ userId, clinicId, reception, timely, helpful, recommendation, createdAt });
+    const review = new Review({ clinicId, reception, timely, helpful, recommendation, createdAt });
     try {
       const savedReview = await review.save();
       res.status(200).json(savedReview);
