@@ -6,6 +6,7 @@ import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 // import dotenv from 'dotenv';
 import listEndpoints from 'express-list-endpoints';
+import escapeStringRegexp from 'escape-string-regexp';
 
 import { createRequire } from 'module';
 
@@ -200,12 +201,12 @@ app.post('/sessions', async (req, res) => {
 });
 
 
-app.get('/secret', authenticateUser);
-app.get('/secret', (req, res) => {
-	const secretMessage = `This is a secret message for ${req.user.email}`;
-	console.log(`SecretMessage in endpoint ${secretMessage}`);
-	res.status(200).json({ secretMessage });
-});
+// app.get('/secret', authenticateUser);
+// app.get('/secret', (req, res) => {
+// 	const secretMessage = `This is a secret message for ${req.user.email}`;
+// 	console.log(`SecretMessage in endpoint ${secretMessage}`);
+// 	res.status(200).json({ secretMessage });
+// });
 
 //? secure endpoint, user needs to be logged in to access this
 app.get('/users/:id', authenticateUser);
@@ -216,8 +217,16 @@ app.get('/users/:id', (req, res) => {
 });
 
 app.get('/clinics', async (req, res) => {
+  const { name, opening_hours } = req.query;
+  const regExName = escapeStringRegexp(name);
+    
+
   try {
-    const allClinics = await Clinic.find()
+    // const allClinics = await Clinic.find(req.query).skip(2).limit(2);
+    let allClinics = await Clinic.find({ name: { $regex: regExName } });
+   
+
+
       if(allClinics) { 
       res.status(200).json(allClinics);
       } else {
@@ -226,21 +235,27 @@ app.get('/clinics', async (req, res) => {
       } catch (err) {
         res.status(404).json({ message: 'Page not found', error: err.errors })
       }
+
+
 });
 
 //? single clinic endpoint
-app.get('/clinics/:id', async (req, res) => {
+app.get('/clinics/:id', async (req, res) => { 
   try {
-  const clinicId = await Clinic.findOne({ clinic_id: req.params.id })
-  if(clinicId) {
-    res.json(clinicId)
-  } else {
-    res.status(404).json({ error: 'Clinic not found' })
-  }
-} catch (err) {
-  res.status(400).json({ error: 'Invalid clinic id' })
-}
-})
+    // const clinicId = await Clinic.findbyId(req.params.id)
+    const clinicId = await Clinic.findById({ _id: req.params.id})
+      if(clinicId) {
+        res.status(200).json(clinicId)
+      } else {
+        res.json(400).json({ error: 'Data not found' });
+      }
+    } catch (err) {
+      res.status(404).json({ message: 'Clinic id not found', error: err.errors })
+    }
+  })
+
+
+
 
 app.post('/clinics', async (req, res) => {
     const { formatted_address, formatted_phone_number, name, opening_hours, rating } = req.body;
@@ -253,10 +268,10 @@ app.post('/clinics', async (req, res) => {
     }
 });
 
-  app.post('/reviews/:clinicId', async (req, res) => {
-    const { clinicId } = req.params
+  app.post('/reviews/clinic/:id', async (req, res) => {
+    const { clinic } = req.params
     const { reception, timely, helpful, recommendation, createdAt } = req.body
-    const review = new Review({ clinicId, reception, timely, helpful, recommendation, createdAt });
+    const review = new Review({ clinic, reception, timely, helpful, recommendation, createdAt });
     try {
       const savedReview = await review.save();
       res.status(200).json(savedReview);
