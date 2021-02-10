@@ -6,25 +6,21 @@ import MapContainer from '../map/MapContainer'
 import ClinicsList from '../clinics/ClinicsList'
 
 import LoginForm from '../login/LoginForm'
+import StartPage from '../../pages/startpage/StartPage'
 
 
 
 export const Routing = () => {
   const accessToken = useSelector(store => store.user.login.accessToken);
-  return (
-    <div>
-      {accessToken && (
-	    <>
-      <ReviewForm />
-      <MapContainer />
-      <ClinicsList />
-</>
-	  )}
-	  {!accessToken && (
-
-       <LoginForm />
-   
-    )}
-    </div>
-  )
-}
+  if(accessToken) {
+    return (
+      <div>
+          <ReviewForm />
+          <MapContainer />
+          {/* <ClinicsList /> */}
+      </div>
+  
+    )} else {
+      return <LoginForm />
+    }
+  }

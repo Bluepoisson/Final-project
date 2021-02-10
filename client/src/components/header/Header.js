@@ -7,7 +7,7 @@ import svg from './svg.png';
 
 const styles = {
   bounce: {
-    animation: 'x 5s',
+    animation: 'x 1s',
     animationName: Radium.keyframes(bounce, 'bounce')
   }
 }

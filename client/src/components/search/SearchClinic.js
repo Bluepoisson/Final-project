@@ -1,31 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-
-import {onSearch} from './SearchClinics'
 
 export const SearchClinic = () => {
-  // const { name } = useParams();
-  const [search, setSearch] = useState('');
   const [clinicDetails, setClinicDetails] = useState('')
 
-const handleOnSearch = (inputValue) => {
-  setSearch()
-  setClinicDetails(onSearch('name', inputValue))
-}
-    return (
-      <div>
-        <input 
+  const onSearch = (key, inputValue) => {
+    const CLINIC_URL = `http://localhost:8080/clinics?${key}=${inputValue}`;
+
+    fetch(CLINIC_URL, { 
+      method: 'GET',
+      headers: { "Content-Type": "application/json" }
+    })
+      .then(res => res.json())
+      .then(data => setClinicDetails(data))
+      .catch(err => console.log("Caught an error:", err))
+      ;
+  }
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+
+    onSearch('name', e.target.form.search.value);
+  }
+
+  return (
+    <form>
+      <input 
         type="text" 
         id="search" 
-        value={search}
-        onChange={(e => handleOnSearch(e.target.value))}
-        />
-        
-      </div>
-      
-     
-    )
-
-  }
+        name="search"
+        placeholder="Search"
+        onChange={((e) => e)}
+      />
+      <input type="submit" onClick={submitSearch} value="Search" />
+      {clinicDetails && clinicDetails.map(clinic => (
+        <p>{clinic.name}</p>
+      ))}
+    </form>
+  )
+}
 
  

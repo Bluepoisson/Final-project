@@ -4,9 +4,10 @@ const initialState = {
   login: {
     accessToken: null,
     userId: localStorage.userId || 0,
-    statusMessage: "",
-    secretMessage: '',
-    loggedIn: false
+    loggedIn: false,
+    statusMessage: '',
+    // secretMessage: '',
+   
   },
 };
 
@@ -28,9 +29,8 @@ export const user = createSlice({
     },
     setStatusMessage: (state, action) => {
       const { statusMessage } = action.payload;
-      // console.log(`Status Message: ${statusMessage}`);
+      console.log(`Status Message: ${statusMessage}`);
       state.login.statusMessage = statusMessage;
-      localStorage.setItem('statusMessage', statusMessage);
     },
     setSecretMessage: (state, action) => {
 			const { secretMessage } = action.payload;

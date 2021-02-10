@@ -39,24 +39,6 @@ export const LoginForm = () => {
     dispatch(user.actions.setStatusMessage({ statusMessage: loginError }));
   };
 
-//  //? SIGNUP user
-//   const handleSignup = (e) => {
-//     e.preventDefault();
-
-//     fetch(SIGNUP_URL, {
-//       method: 'POST',
-//       body: JSON.stringify({ email, password }),
-//       headers: { 'Content-Type': 'application/json' },
-//     })
-//       .then((res) => {
-//         if (!res.ok) {
-//           throw 'Signup Failed';
-//         }
-//         return res.json();
-//       })
-//       .then((json) => handleLoginSuccess(json))
-//       .catch((err) => handleLoginFailed(err));
-//   };
 
 //? LOGIN user
   const handleLogin = (e) => {
