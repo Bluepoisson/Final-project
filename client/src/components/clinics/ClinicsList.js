@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import './clinicsCardStyles.css'
-// import './clinicsListStyles.css'
+// import './clinicsCardStyles.css'
+import './clinicsListStyles.css'
 
 const ClinicsList = () => {
   const [clinics, setClinics] = useState([]);
@@ -17,16 +17,19 @@ const ClinicsList = () => {
 
   return (
 <>
-    <div className="card_container" >
+    <div className="container_clinics_list" >
       {
     clinics.map(clinic => (
       <div className="card" key={clinic._id}>
+          <a href="https://bit.ly/36PkBjU">
         <img src="" alt=""/>
-     <h2 className="card__info h2">{clinic.formatted_address}</h2>
-     <h4>Rating:{clinic.rating}</h4>
+     <h2 className="card__info h2">{clinic.name}</h2>
+     <h3>Rating:{clinic.rating}</h3>
      <h4 className="card__info h4 ">{clinic.formatted_address}</h4>
      <h4 className="card__info h4 ">{clinic.formatted_phone_number}</h4>
+     <h4>Opening hours:{clinic.opening_hours}</h4>
      <button>0 Likes</button>
+     </a>
       </div>
      )) 
      };

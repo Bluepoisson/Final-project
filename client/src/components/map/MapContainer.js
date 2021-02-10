@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker, InfoWindow, MarkerLabel } from '@react-google-maps/api';
 import { useHistory } from "react-router-dom"
-import Search from '../search/Search'
+// import Search from '../search/Search'
+
+
 
 const MapContainer = () => {
+ 
   const history = useHistory()
 
   const mapStyles = {        
@@ -81,6 +84,9 @@ const reDirect = () => {
   history.push(`/clinics`)
 }
 
+let service;
+const libraries = ["places"];
+
 //? draggable marker 
 // const onMarkerDragEnd = (e) => {
 //   const lat = e.latLng.lat();
@@ -91,11 +97,12 @@ const reDirect = () => {
 // const API_KEY = `process.env.GOOGLE_API_KEY`; 
   
   return (
-   
-<>     
-   
+  <>     
       <LoadScript  
-      googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY} >  
+      googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}
+
+      >  
+
       <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={13}
@@ -122,10 +129,11 @@ const reDirect = () => {
             </InfoWindow>
             )
          }
-     </GoogleMap>
-     </LoadScript>
+      </GoogleMap>
+    </LoadScript>
   </>
   )
 }
+
 
 export default MapContainer;

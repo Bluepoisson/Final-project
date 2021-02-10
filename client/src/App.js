@@ -10,7 +10,7 @@ import MapContainer from './components/map/MapContainer';
 // import { ClinicsCard }from './components/clinics/ClinicsCard';
 // import ClinicsList from './components/clinics/ClinicsList';
 
-
+import { SearchClinic } from './components/search/SearchClinic';
 
 
 
@@ -42,14 +42,14 @@ export const App = () => {
        <main>
         <Switch>
 
-          <Routing />
-            {/* <Route exact path="/" component={StartPage} />
+          {/* <Routing /> */}
+            <Route exact path="/" component={StartPage} />
             <Route exact path="/login" component={LoginForm} />
      
             <Route exact path="/review" component={ReviewForm} />
             <Route exact path="/map" component={MapContainer} />
-            <Route exact path="/clinics" component={ClinicsList}/>
-           <Route exact path="/register" component={SignupForm} /> */}
+            <Route exact path="/clinics" component={SearchClinic}/>
+           <Route exact path="/register" component={SignupForm} />
 
            
             

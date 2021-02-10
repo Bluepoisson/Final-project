@@ -5,25 +5,25 @@ const RadioTime = ({ onTimeInput }) => {
   return (
     <fieldset>
     <div className="question-card">
-      <h3 className="question-header" tabIndex="0">Where your needs met?</h3>
+      <h3 className="question-header" tabIndex="0">Was your appointment time respected?</h3>
       <label htmlFor="yes">Yes</label>
       <input
-        name="Helpful"
+        name="Recommendation"
         id="Yes"
         type="radio"
         onChange={e => onTimeInput(e.target.value)}
       />
-      <label htmlFor="somewhat">Mostly</label>
+      <label htmlFor="maybe">Maybe</label>
       <input
-        name="Helpful"
+        name="Recommendation"
         id="somewhat"
         type="radio"
         onChange={e => onTimeInput(e.target.value)}
       />
       <label htmlFor="nope">Whatever</label>
       <input
-        name="Helpful"
-        id="nope"
+        name="Recommendation"
+        id="Nope"
         type="radio"
         onChange={e => onTimeInput(e.target.value)}
       />

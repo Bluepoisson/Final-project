@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom'
+import { bounce } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
 
 import BackArrow from '../lib/BackArrow';
 
+const styles = {
+  bounce: {
+    animation: 'x 2s',
+    animationName: Radium.keyframes(bounce, 'bounce')
+  }
+}
 
  const SignupForm = () => {
 	const SIGNUP_URL = 'http://localhost:8080/users';
@@ -34,12 +42,17 @@ import BackArrow from '../lib/BackArrow';
 			if (accessToken) {
 				window.localStorage.setItem("accessToken", accessToken)
 				history.push(`/users`)
+				
 			}
 		})
 			.then((json) => json)
 			.catch(err => {
         setErrorMessage(err.message)
 	});
+}
+
+const reDirect = () => {
+	history.push(`/login`)
 }
 
 //? startover if faulty sign up
@@ -59,7 +72,9 @@ import BackArrow from '../lib/BackArrow';
 		</Link>
 		<section className="login-form">
 			<form className="container" onSubmit={handleSignup}>
-			<h1>Join us!</h1>
+			<StyleRoot>
+			<h1 className="test" style={styles.bounce}>Join us!</h1>
+			</StyleRoot>
 					<div className="form-control">
 					<input
 						required
@@ -86,7 +101,7 @@ import BackArrow from '../lib/BackArrow';
 				 <label className="form-label">Password</label>
 				 </div>
         <div>{errorMessage}</div>
-				<button className="btn" type="submit">Yes!</button>
+				<button className="btn" type="submit" onClick={reDirect}>Yes!</button>
 			</form>
 		</section>
 	</>

@@ -23,4 +23,5 @@
 	width: 100vh;
 	padding: 30px;
 	/* margin: 0 0 50px 50px; */
+	z-index: 4;
 }
