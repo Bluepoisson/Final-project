@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RadioRec = ({ onRecInput }) => {
+const RadioRec = () => {
 
   return (
     <fieldset>
@@ -11,21 +11,21 @@ const RadioRec = ({ onRecInput }) => {
         name="Recommendation"
         id="Yes"
         type="radio"
-        onChange={e => onRecInput(e.target.value)}
+        onChange={e => (e.target.value)}
       />
       <label htmlFor="maybe">Maybe</label>
       <input
         name="Recommendation"
         id="maybe"
         type="radio"
-        onChange={e => onRecInput(e.target.value)}
+        onChange={e => (e.target.value)}
       />
       <label htmlFor="nope">Whatever</label>
       <input
         name="Recommendation"
         id="nope"
         type="radio"
-        onChange={e => onRecInput(e.target.value)}
+        onChange={e => (e.target.value)}
       />
     </div>
     </fieldset>

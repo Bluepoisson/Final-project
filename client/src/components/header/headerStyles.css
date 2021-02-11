@@ -1,41 +1,47 @@
-.banner {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	width: 100%;
-	border-radius: 15px;
-	background: #2196f3;
-	padding: 20px 40px;
-	border-radius: 5px;
-	justify-content: left;
-	align-items: center;
+.logo {
+	height: 70px;
+	width: 70px;
+	margin-left: -40px;
+	/* font-size: 24px;
+	font-weight: lighter; */
 }
 
 .title {
+	font-family: 'Lobster', sans-serif;
+	position: relative;
+	margin-left: -500px;
 	font-weight: bold;
 	color: #fff;
+	opacity: 0.8;
 	font-size: 52px;
+	text-shadow: 4px 4px 2px #2f303a;
 }
 
-.logo {
+.nav-container {
+	min-height: 48px;
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	margin: auto;
+	justify-content: space-between;
+	align-items: center;
+	padding: 16px 100px;
+	background-color: #2196f3;
+	border-radius: 4px;
+}
+
+a {
+	text-decoration: none;
+	margin: 5px;
+	font-weight: bold;
+}
+
+ul {
+	display: flex;
+	list-style: none;
+}
+
+li {
+	padding-left: 160px;
 	position: relative;
-	height: 70px;
-	width: 70px;
 }
-
-/* img {
-	position: absolute;
-	margin: -10px 0 0 155px;
-	height: 400px;
-	width: 380px;
-	border-radius: 50%;
-} */
-/* 
-.banner-img {
-	position: absolute;
-	height: 300px;
-	width: 300px;
-	border-radius: 50%;
-	top: 50px;
-	left: 15px;
-} */

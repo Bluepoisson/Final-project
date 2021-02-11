@@ -2,7 +2,12 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { user } from '../reducers/user'
-import  Reviews  from '../survey/testimonials/Reviews'
+
+import ReviewForm from '../survey/ReviewForm';
+import { SearchClinic } from '../search/SearchClinic';
+import ClinicsList from '../clinics/ClinicsList';
+import Nav from '../header/Nav';
+
 
 import './profileStyles.css';
 
@@ -63,15 +68,18 @@ const Profile = () => {
   } 
   return (
    <>
+      <Nav />
       <div className="container-profile">
-        <h2>Profile:</h2>
-        <h4>userId:</h4>
+        <h2>Profile</h2>
+        {/* <h4>userId:</h4>
         <p> {`${userId}`}</p>
-        <p>This is the profile</p>
+        <p>Something something</p> */}
         <p>{secretMessage}</p>
-      <button className="btn-secret" type="submit" onClick={showSecret} value="Secret" />
-      <button className="btn-logout" type="submit" onClick={handleLogout} value="Logout" />
-      <Reviews />
+      {/* <button className="btn-secret" type="submit" onClick={showSecret} value="Secret">Secret</button> */}
+      <button className="btn-logout" type="submit" onClick={handleLogout} value="Logout">Sign out</button>
+      <ReviewForm />
+      <SearchClinic />
+      <ClinicsList />
       </div>
      
   </>

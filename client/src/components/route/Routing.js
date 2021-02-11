@@ -6,7 +6,11 @@ import MapContainer from '../map/MapContainer'
 import ClinicsList from '../clinics/ClinicsList'
 
 import LoginForm from '../login/LoginForm'
-import StartPage from '../../pages/startpage/StartPage'
+import StartPage from '../../pages/startpage/StartPage';
+import { SearchClinic } from '../search/SearchClinic';
+import Profile from '../profile/Profile';
+
+
 
 
 
@@ -15,12 +19,10 @@ export const Routing = () => {
   if(accessToken) {
     return (
       <div>
-          <ReviewForm />
-          <MapContainer />
-          {/* <ClinicsList /> */}
+          <Profile />
       </div>
   
     )} else {
-      return <LoginForm />
+      return <StartPage />
     }
   }

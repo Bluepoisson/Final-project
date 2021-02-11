@@ -10,7 +10,7 @@ const SelectClinic = ({ clinic, onClinicInput }) => {
       <select aria-label="Select clinic" tabIndex="0"
         value={clinic}
         required
-        onChange={e => onClinicInput(e.target.value)} 
+        onChange={(e) => onClinicInput(e.target.value)} 
         >
         <option value="clinic-option" name="clinic" >Choose clinic</option>
         <option value="sodervarn" name="clinic" >Vårdcentralen Södervärn</option>

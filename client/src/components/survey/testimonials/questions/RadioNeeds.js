@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const RadioTime = ({ onTimeInput }) => {
+const RadioNeeds = () => {
+  const [needs, setNeeds] = useState('');
+
+  const handleOnSetNeeds = () => {
+    needs();
+}
 
   return (
     <fieldset>
@@ -11,21 +16,21 @@ const RadioTime = ({ onTimeInput }) => {
         name="Helpful"
         id="Yes"
         type="radio"
-        onChange={e => onTimeInput(e.target.value)}
+        onChange={e => setNeeds(e.target.value)}
       />
       <label htmlFor="somewhat">Mostly</label>
       <input
         name="Helpful"
         id="somewhat"
         type="radio"
-        onChange={e => onTimeInput(e.target.value)}
+        onChange={e => setNeeds(e.target.value)}
       />
       <label htmlFor="nope">Whatever</label>
       <input
         name="Helpful"
         id="nope"
         type="radio"
-        onChange={e => onTimeInput(e.target.value)}
+        onChange={e => setNeeds(e.target.value)}
       />
     </div>
     </fieldset>
@@ -34,4 +39,4 @@ const RadioTime = ({ onTimeInput }) => {
 
 };
 
-export default RadioTime;
+export default RadioNeeds;

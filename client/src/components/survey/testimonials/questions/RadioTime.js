@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-const RadioTime = ({ onTimeInput }) => {
+const RadioTime = () => {
+  const [time, setTime] = useState('');
+
+  const handleOnSetTime = (e) => {
+    time(e.target.value);
+}
 
   return (
     <fieldset>
@@ -8,24 +13,24 @@ const RadioTime = ({ onTimeInput }) => {
       <h3 className="question-header" tabIndex="0">Was your appointment time respected?</h3>
       <label htmlFor="yes">Yes</label>
       <input
-        name="Recommendation"
+        name="Timely"
         id="Yes"
         type="radio"
-        onChange={e => onTimeInput(e.target.value)}
+        onChange={e => setTime(e.target.value)}
       />
       <label htmlFor="maybe">Maybe</label>
       <input
-        name="Recommendation"
+        name="Timely"
         id="somewhat"
         type="radio"
-        onChange={e => onTimeInput(e.target.value)}
+        onChange={e => setTime(e.target.value)}
       />
       <label htmlFor="nope">Whatever</label>
       <input
-        name="Recommendation"
+        name="Timely"
         id="Nope"
         type="radio"
-        onChange={e => onTimeInput(e.target.value)}
+        onChange={e => setTime(e.target.value)}
       />
     </div>
     </fieldset>

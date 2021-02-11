@@ -2,7 +2,7 @@
 //   import './loginFormStyles.css';
   
 //   ? LABEL WAVE ANIMATION
-//   export const labels = querySelectorAll('form-control label')
+//   export const Wave = querySelectorAll('form-control label')
 //     labels.forEach(label => {
 //       label.innerHTML = label.innerText
 //         .split('')
