@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { uuid } from 'uuidv4';
 
 import './searchClinicStyles.css';
 
 export const SearchClinic = () => {
   const [clinicDetails, setClinicDetails] = useState([])
   const [search, setSearch] = useState('')
+  
   const onSearch = () => {
     const CLINIC_URL = `http://localhost:8080/clinics?name=${search}`;
 
@@ -35,16 +37,16 @@ export const SearchClinic = () => {
         type="text" 
         id="search" 
         name="search"
-        placeholder="Search ..."
+        placeholder="Search..."
         onChange={(e) => setSearch(e.target.value)}
       />
       <input className="submit-btn" type="submit" value="Search" />
       {clinicDetails && clinicDetails.map(clinic => (
-        <p>{clinic.name}</p>
-        // <ul className="clinic-search">
-        // <li key=''>{clinic.name}</li>
+        // <p>{clinic.name}</p>
+        <ul className="clinic-search">
+        <li key={uuid}>{clinic.name}</li>
         
-        // </ul>
+        </ul>
       ))}
     </form>
   

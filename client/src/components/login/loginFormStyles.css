@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap');
 
-section::before {
+/* section::before {
 	content: '';
 	position: absolute;
 	top: 30%;
@@ -9,7 +9,7 @@ section::before {
 	width: 400px;
 	background: linear-gradient(#f00, #f0f);
 	border-radius: 50%;
-}
+} */
 
 .login-form {
 	box-sizing: border-box;

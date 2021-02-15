@@ -5,7 +5,7 @@ import Radium, {StyleRoot} from 'radium';
 import svg from './svg.png';
 import './headerStyles.css';
 
-const styles = {
+const animLogo = {
   bounce: {
     animation: 'x 1s',
     animationName: Radium.keyframes(bounce, 'bounce')
@@ -14,11 +14,10 @@ const styles = {
 
 const Nav = () => {
 
-
   return (
     <StyleRoot>
   <nav className="nav-container">
-  <img className="logo" style={styles.bounce} src={svg} alt="Logo" />
+  <img className="logo" style={animLogo.bounce} src={svg} alt="Logo" />
      <h1 className="title">Sick advisor</h1>
         <ul>
           <li>

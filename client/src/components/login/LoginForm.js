@@ -6,7 +6,7 @@ import { user } from '../reducers/user';
 import './loginFormStyles.css';
 
 // import waitroom from './waitroom.png';
-
+import Nav from '../header/Nav';
 import Profile from './../profile/Profile';
 import BackArrow from '../lib/BackArrow';
 
@@ -73,13 +73,14 @@ export const LoginForm = () => {
 
   return (
     <>
+    <Nav />
     <Link className="backLink" to={`/`}>
 		<BackArrow />
 		</Link>
     <section className="login-form">
        {/* <img src={waitroom} alt="Logo"/> */}
       <form className="container">
-      <h1>Please Login</h1>
+      <h1>Please Log in</h1>
         <div className="form-control">
           <input
             type="email"

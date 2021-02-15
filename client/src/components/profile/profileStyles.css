@@ -28,13 +28,11 @@
 	border-radius: 10px;
 	margin: 5px;
 }
-.btn-logout,
-.btn-secret:focus {
+.btn-logoutfocus {
 	outline: 0;
 }
 
-.btn-logout,
-.btn-secret:active {
+.btn-logout:active {
 	transform: scale(0.98);
 }
 .btn-secret {

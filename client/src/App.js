@@ -26,8 +26,9 @@ export const App = () => {
     <Provider store={store}>
     
        <BrowserRouter>
-       <main>
+       <main className='section'>
         <Switch>
+   
             {/* <Routing /> */}
             <Route exact path="/" component={StartPage} />
             <Route exact path="/login" component={LoginForm} />
@@ -35,6 +36,7 @@ export const App = () => {
             <Route exact path="/map" component={MapContainer} />
             <Route exact path="/clinics" component={ClinicsList}/>
            <Route exact path="/register" component={SignupForm} />
+  
         </Switch>
         </main>
       </BrowserRouter>

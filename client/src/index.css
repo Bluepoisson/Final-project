@@ -19,3 +19,14 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
+
+.section::before {
+	content: '';
+	position: absolute;
+	top: 30%;
+	left: 40%;
+	height: 400px;
+	width: 400px;
+	background: linear-gradient(#f00, #f0f);
+	border-radius: 50%;
+}

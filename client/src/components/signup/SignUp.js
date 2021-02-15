@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom'
 import { bounce } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
 
+import Nav from '../header/Nav';
 import BackArrow from '../lib/BackArrow';
 
 const styles = {
@@ -67,6 +68,7 @@ const reDirect = () => {
 
 	return (
 		<>
+		<Nav />
 		<Link className="backLink" to={`/`}>
 		<BackArrow />
 		</Link>
