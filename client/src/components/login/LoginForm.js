@@ -47,8 +47,8 @@ export const LoginForm = () => {
 
     fetch(LOGIN_URL, {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
     })
       .then((res) => {
         if (!res.ok) {
@@ -64,6 +64,8 @@ export const LoginForm = () => {
         setErrorMessage(err.message)
       })
   }
+
+
   const reDirect = () => {
     history.push(`/register`)
   }
@@ -75,7 +77,7 @@ export const LoginForm = () => {
     <>
     <Nav />
     <Link className="backLink" to={`/`}>
-		<BackArrow />
+		  <BackArrow />
 		</Link>
     <section className="login-form">
        {/* <img src={waitroom} alt="Logo"/> */}

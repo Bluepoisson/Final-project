@@ -3,6 +3,7 @@ import { wobble } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
 
 import  Nav from '../../components/header/Nav'
+import { Footer} from '../../components/footer/Footer'
 import illustration from './illustration.svg';
 import  './startPageStyles.css';
 
@@ -26,7 +27,10 @@ const styles = {
             </div>
              <img className="startpage-illustration" src={illustration} alt=""/>
       </section>
+  
     </StyleRoot>
+    <Footer />
+ 
    
     </>
   )

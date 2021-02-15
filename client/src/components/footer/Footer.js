@@ -1,8 +1,27 @@
 import React from 'react';
+import { instagram } from '@iconify/react';
 
-const Footer = () => {
+export const Footer = () => {
 
   return (
+    <footer>
+    <div className="nav-container">
+      <ul >
+        <li >
+          <a href="https://instagram.com"></a>
+            <img src="" alt="" />
+        </li>
+      </ul>
+      <li >
+          <a href="https://instagram.com"></a>
+            <img src={instagram} alt="" />
+        </li>
+        <li >
+          <a href="https://instagram.com"></a>
+            <img src="" alt="" />
+        </li>
+      </div>
+    </footer>
     
   )
 }

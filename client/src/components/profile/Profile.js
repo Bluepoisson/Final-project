@@ -1,10 +1,11 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from "react-router-dom"
 import { user } from '../reducers/user'
 
-import ReviewForm from '../survey/ReviewForm';
+
 import { SearchClinic } from '../search/SearchClinic';
-// import ClinicsList from '../clinics/ClinicsList';
+
 import Nav from '../header/Nav';
 
 
@@ -16,6 +17,7 @@ const Profile = () => {
   
   const dispatch = useDispatch()
   const accessToken = useSelector((store) => store.user.login.accessToken)
+  const history = useHistory()
   // const userId = useSelector((store) => store.user.login.userId)
   // const secretMessage = useSelector((store) => store.user.login.secretMessage);
   // const statusMessage = useSelector((store) => store.user.login.statusMessage);
@@ -27,13 +29,7 @@ const Profile = () => {
     dispatch(
       user.actions.setStatusMessage({
         statusMessage: loginResponse.statusMessage,
-      })
-    );
-    // dispatch(
-		// 	user.actions.setSecretMessage({
-		// 		secretMessage: loginResponse.secretMessage,
-		// 	})
-		// );
+      }));
   };
 
   const loginFailed = (loginError) => {
@@ -46,22 +42,15 @@ const Profile = () => {
 		window.location.href = '/';
 	};
 
-  // const showSecret = (e) => {
-	// 	e.preventDefault();
-	// 	fetch(PROFILE_URL, {
-	// 		method: 'GET',
-	// 		headers: { Authorization: accessToken },
-	// 	})
-	// 		.then((res) => {
-	// 			if (!res.ok) {
-	// 				throw new Error('Secret failed');
-	// 			}
-	// 			return res.json();
-	// 		})
-	// 		.then((json) => loginSuccess(json))
-	// 		.catch((err) => loginFailed(err));
-  // };
-  
+ 
+  const reDirectReview = () => {
+    history.push(`/review`)
+  }
+
+  const reDirectClinics = () => {
+    history.push(`/clinics`)
+  }
+
   if (!accessToken) {
     return <div className="err-text" value={loginFailed}>Couldn't log in</div>
   } 
@@ -70,13 +59,10 @@ const Profile = () => {
       <Nav />
       <div className="container-profile">
         <h2>Profile</h2>
-        {/* <h4>userId:</h4>
-        <p> {`${userId}`}</p>
-        <p>Something something</p> */}
-        {/* <p>{secretMessage}</p> */}
-      {/* <button className="btn-secret" type="submit" onClick={showSecret} value="Secret">Secret</button> */}
-      <button className="btn-logout" type="submit" onClick={handleLogout} value="Logout">Sign out</button>
-      <ReviewForm />
+         <button className="btn"type="submit" onClick={reDirectClinics} value="Review">Clinics</button>
+          <button className="btn"type="submit" onClick={reDirectReview} value="Review">Review</button>
+           <button className="btn-logout" type="submit" onClick={handleLogout} value="Logout">Sign out</button>
+      {/* <ReviewForm /> */}
       <SearchClinic />
       {/* <ClinicsList /> */}
       </div>

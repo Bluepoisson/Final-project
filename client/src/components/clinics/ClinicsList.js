@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom"
 
 import './clinicsListStyles.css'
+import BackArrow from '../lib/BackArrow';
 
 const ClinicsList = () => {
   const [clinics, setClinics] = useState([]);
@@ -17,6 +19,9 @@ const ClinicsList = () => {
 
   return (
 <>
+<Link className="backLink" to={`/login`}>
+		  <BackArrow />
+		</Link>
     <div className="container_clinics_list" >
       { clinics.map(clinic => (
       <div className="card " key={clinic._id}>

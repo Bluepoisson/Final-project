@@ -5,7 +5,6 @@ import './reviewForm.css';
 
 
 const Review = () => {
-  const REVIEW_URL = 'http://localhost:8080/reviews'
 
   const dispatch = useDispatch();
   const accessToken = useSelector((store) => store.user.login.accessToken);
@@ -13,13 +12,31 @@ const Review = () => {
   const [reception, setReception] = useState('');
   const [time, setTime] = useState('');
   const [recommendation, setRecommendation] = useState('');
+  const [clinic, setClinic] = useState('');
+  const [clinicList, setClinicList] = useState('');
  
 
+  const getClinic = () => {
+    const CLINIC_URL = `http://localhost:8080/clinics/`; 
 
-  
+    fetch(CLINIC_URL, { 
+      method: 'GET',
+      headers: { "Content-Type": "application/json"}
+    })
+      .then(res => res.json())
+      .then(data => setClinicList(data))
+      .catch(err => console.log("Caught an error:", err))
+  } 
+
+  useEffect(() => {
+    getClinic();
+  }, []);
+
 
   const postReview = () => {
+    const REVIEW_URL = `http://localhost:8080/reviews/${clinic}`
 
+ 
         fetch(REVIEW_URL, {
           method: 'POST',
           body: JSON.stringify({ reception, time, recommendation }),
@@ -33,8 +50,9 @@ const Review = () => {
             return res.json();
           }
         })
-            .catch(err => console.log("Caught an error:", err))
-    }
+            .catch(err => console.log("Caught an error:", err)) 
+        } 
+ 
 
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -43,11 +61,31 @@ const Review = () => {
 
       return (
         <>
-      
+   
         <form className="review-container" 
               onSubmit={handleSubmit}
               >
               <h1 className="review-title">Review your recent health care experience</h1>
+              <fieldset>
+                <div className="question-card">
+                  <h3 className="question-header" tabIndex="0">Select clinic</h3>
+                      <select
+                        className="select-input"
+                        name="clinicId"
+                        id="clinicId"
+                        value={clinic}
+                        onChange={(e) => setClinic(e.target.value)}
+                        required
+                        >
+
+                         { clinicList && clinicList.map(clinic => (
+                          <option value={clinic._id}>{clinic.name}</option>
+                         )) 
+                         };
+                         
+                      </select>
+                    </div>
+                </fieldset>
               <fieldset>
                 <div className="question-card">
                   <h3 className="question-header" tabIndex="0">How did you experience the reception?</h3>
@@ -82,22 +120,22 @@ const Review = () => {
                     </div>
                 </fieldset>
 
-              <fieldset>
-              <div className="question-card">
-                <h3 className="question-header" tabIndex="0">Would you recommend this clinic?</h3>
-                  <select
+                <fieldset>
+                <div className="question-card">
+                  <h3 className="question-header" tabIndex="0">Would you recommend this clinic?</h3>
+                    <select
                         className="select-input"
                         value={recommendation}
                         onChange={(e) => setRecommendation(e.target.value)}
                         required
                         >
                           <option value="">Select</option>
-                          <option value="Professional">Yes</option>
-                          <option value="Neutral">Maybe</option>
-                          <option value="Poor">Nope</option>
-                      </select>
+                          <option value="Yes">Yes</option>
+                          <option value="Maybe">Maybe</option>
+                          <option value="No">Nope</option>
+                        </select>
                     </div>
-                </fieldset>
+                  </fieldset>
                     <input className="submit-btn" type="submit" value="Submit"/>
           </form>
         </>
