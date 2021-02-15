@@ -9,17 +9,17 @@ import listEndpoints from 'express-list-endpoints';
 import escapeStringRegexp from 'escape-string-regexp';
 
 import { createRequire } from 'module';
-
 //! could not import clinics-data from './data/clinics-data.json' because of type error json was not recognized. Deconstructing worked.
 const require = createRequire(import.meta.url);
 const clinicsData = require('./data/clinics-data.json');
 
 
 // dotenv.config();
-// console.log("Our hero is:" + process.env.HERO);
 
-
-
+// import {
+//   userSchema, 
+//   clinicSchema, 
+//   reviewSchema } from './schemas'
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProject';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -95,28 +95,35 @@ const clinicSchema = new mongoose.Schema({
 });
 
 const reviewSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-    clinic: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Clinic',
-        required: true
-    },
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   required: true
+  // },
+    // clinic: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Clinic',
+    //     required: true
+    // },
     reception: {
       type: String,
+      required: true
     },
-    timely: {
+    time: {
       type: String,
+      required: true
     },
-    helpful: {
-      type: String,
-    },
+    // needs: {
+    //   type: String,
+    // },
     recommendation: {
       type: String,
+      required: true
     },
+    // testimonial: {
+    //   type: String,
+    //   maxLength: 200
+    // },
     createdAt: {
         type: Date,
         default: Date.now
@@ -132,23 +139,15 @@ if (process.env.RESET_DATABASE) {
   console.log('Resetting database!');
   const seedDatabase = async () => {
   
-  
-  // await Review.deleteMany();
   await Clinic.deleteMany();
 
   clinicsData.forEach(item => {
     const newClinic = new Clinic(item);
     newClinic.save();
   })
-
-  // reviewData.forEach(item => {
-  //   const newReview = new Review(item);
-  //   newReview.save();
-  // })
   }
   seedDatabase();
 }
-
 
 //   PORT=9000 npm start
 const port = process.env.PORT || 8080;
@@ -200,21 +199,15 @@ app.post('/sessions', async (req, res) => {
   }
 });
 
-// app.get('/secret', authenticateUser);
-// app.get('/secret', (req, res) => {
+//? secure endpoint, user needs to be logged in to access this
+// app.get('/users/:id', authenticateUser);
+// app.get('/users/:id', (req, res) => {
 // 	const secretMessage = `This is a secret message for ${req.user.email}`;
 // 	console.log(`SecretMessage in endpoint ${secretMessage}`);
 // 	res.status(200).json({ secretMessage });
 // });
 
-//? secure endpoint, user needs to be logged in to access this
-app.get('/users/:id', authenticateUser);
-app.get('/users/:id', (req, res) => {
-	const secretMessage = `This is a secret message for ${req.user.name}`;
-	console.log(`SecretMessage in endpoint ${secretMessage}`);
-	res.status(200).json({ secretMessage });
-});
-
+//? all clinics and name + openingHOurs query 
 app.get('/clinics', async (req, res) => {
   const { name, opening_hours } = req.query;
   let allClinics = null;
@@ -222,11 +215,13 @@ app.get('/clinics', async (req, res) => {
     if(name){
       const regExName = escapeStringRegexp(name);
         allClinics = await Clinic.find({ name: { $regex: regExName } });
+        // console.log(regExname `this is regeexname`);
     }  else if(opening_hours) {
       const regExOpenHours = escapeStringRegexp(opening_hours);
       allClinics = await Clinic.find({ opening_hours: { $regex: regExOpenHours } });
+      // console.log(regExOpenHours `this is regexopenh`);
     } else {
-      allClinics = await Clinic.find(req.query).skip(2).limit(2);
+      allClinics = await Clinic.find(req.query);
     }
 
     if(allClinics) { 
@@ -242,7 +237,6 @@ app.get('/clinics', async (req, res) => {
 //? single clinic endpoint
 app.get('/clinics/:id', async (req, res) => { 
   try {
-    // const clinicId = await Clinic.findbyId(req.params.id)
     const clinicId = await Clinic.findById({ _id: req.params.id})
       if(clinicId) {
         res.status(200).json(clinicId)
@@ -264,23 +258,32 @@ app.post('/clinics', async (req, res) => {
       res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
     }
 });
-  app.post('/reviews/clinic/:id', authenticateUser);
-  app.post('/reviews/clinic/:id', async (req, res) => {
-    const { clinic } = req.params
-    const { reception, timely, helpful, recommendation, createdAt } = req.body
-    const review = new Review({ clinic, reception, timely, helpful, recommendation, createdAt });
-    try {
-      const savedReview = await review.save();
-      res.status(200).json(savedReview);
-    } catch (err) {
-      res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
-    }
-  });
 
+app.post('/reviews', async (req, res) => {
+  const { reception, time, recommendation, createdAt } = req.body
+  const review = new Review({ reception, time, recommendation, createdAt });
+  try {
+    const savedReview = await review.save();
+    res.status(200).json(savedReview);
+  } catch (err) {
+    res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
+  }
+});
 
+  // app.post('/reviews/clinic/:id', authenticateUser);
+  // app.post('/reviews/clinic/:id', async (req, res) => {
+  //   const { clinic } = req.params
+  //   const { reception, time, helpful, recommendation, createdAt } = req.body
+  //   const review = new Review({ clinic, reception, time, helpful, recommendation, createdAt });
+  //   try {
+  //     const savedReview = await review.save();
+  //     res.status(200).json(savedReview);
+  //   } catch (err) {
+  //     res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
+  //   }
+  // });
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
