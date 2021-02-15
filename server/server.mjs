@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// user validation
+//? user validation
 userSchema.pre('save', async function (next) {
 	const user = this;
 
@@ -93,13 +93,13 @@ const reviewSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    // required: true
   },
-    // clinic: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Clinic',
-    //     required: true
-    // },
+    clinic: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Clinic',
+        // required: true
+    },
     reception: {
       type: String,
       required: true
@@ -165,7 +165,7 @@ app.get('/', (req, res) => {
     res.send(listEndpoints(app))
   })
 
-// Sign-up
+//? Register
 app.post('/users', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -179,7 +179,7 @@ app.post('/users', async (req, res) => {
   }
 });
 
-// Login
+//? Login
 app.post('/sessions', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -195,9 +195,11 @@ app.post('/sessions', async (req, res) => {
 });
 
 
-//? all clinics and name + openingHOurs query 
+//? all clinics inc. name + openingHOurs query 
 app.get('/clinics', async (req, res) => {
+
   const { name, opening_hours } = req.query;
+  
   let allClinics = null;
   try {
     if(name){
@@ -243,16 +245,17 @@ app.post('/clinics', async (req, res) => {
       const savedClinic = await clinic.save();
       res.status(200).json(savedClinic);
     } catch (err) {
-      res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
+      res.status(400).json({ message: 'Bad request. Could not save clinic to the database', error: err.errors });
     }
 });
 
 //? user review endpoint
 app.post('/reviews', authenticateUser)
-app.post('/reviews', async (req, res) => {
+app.post('/reviews/', async (req, res) => {
   const user = req.user
   const { reception, time, recommendation, createdAt } = req.body
-  const review = new Review({ user, reception, time, recommendation, createdAt });
+  const review = new Review({  user, reception, time, recommendation, createdAt });
+
   try {
     const savedReview = await review.save();
     res.status(200).json(savedReview);
@@ -261,18 +264,40 @@ app.post('/reviews', async (req, res) => {
   }
 });
 
-  // app.post('/reviews/clinic/:id', authenticateUser);
-  // app.post('/reviews/clinic/:id', async (req, res) => {
-  //   const { clinic } = req.params
-  //   const { reception, time, recommendation, createdAt } = req.body
-  //   const review = new Review({ clinic, reception, time, recommendation, createdAt });
-  //   try {
-  //     const savedReview = await review.save();
-  //     res.status(200).json(savedReview);
-  //   } catch (err) {
-  //     res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
-  //   }
-  // });
+
+
+// //? user review endpoint w/ clinic
+// app.post('/clinics/:id/reviews', authenticateUser)
+// app.post('/clinics/:id/reviews', async (req, res) => {
+
+//   const clinicId = req.params.id
+
+//   const { reception, time, recommendation, createdAt } = req.body
+//   const review = new Review({  clinicId, user, reception, time, recommendation, createdAt });
+
+//   try {
+//     const savedReview = await review.save();
+//     res.status(200).json(savedReview);
+//   } catch (err) {
+//     res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
+//   }
+// });
+
+
+  app.post('/reviews/:clinicId', authenticateUser);
+  app.post('/reviews/:clinicId', async (req, res) => {
+    const user = req.user
+    const clinicId = req.params.clinicId
+    const clinic = await Clinic.findById(clinicId)
+    const { reception, time, recommendation, createdAt } = req.body
+    const review = new Review({  user, clinic, reception, time, recommendation, createdAt });
+    try {
+      const savedReview = await review.save();
+      res.status(200).json(savedReview);
+    } catch (err) {
+      res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
+    }
+  });
 
 // Start the server
 app.listen(port, () => {
