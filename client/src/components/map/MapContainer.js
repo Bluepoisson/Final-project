@@ -93,11 +93,13 @@ useEffect(() => {
 //   const lng = e.latLng.lng();
 //   setCurrentPosition({ lat, lng})
 // };
+
+  const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
   
   return (
   <>     
       <LoadScript  
-      googleMapsApiKey='AIzaSyAHKF6kjlGxaNdFBoFBbZNE-JzeBPfXzZU'
+      googleMapsApiKey={API_KEY}
 
       >  
 

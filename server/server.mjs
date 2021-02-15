@@ -16,11 +16,6 @@ const clinicsData = require('./data/clinics-data.json');
 
 // dotenv.config();
 
-// import {
-//   userSchema, 
-//   clinicSchema, 
-//   reviewSchema } from './schemas'
-
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProject';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('useCreateIndex', true);
@@ -95,11 +90,11 @@ const clinicSchema = new mongoose.Schema({
 });
 
 const reviewSchema = new mongoose.Schema({
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   required: true
-  // },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
     // clinic: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'Clinic',
@@ -199,13 +194,6 @@ app.post('/sessions', async (req, res) => {
   }
 });
 
-//? secure endpoint, user needs to be logged in to access this
-// app.get('/users/:id', authenticateUser);
-// app.get('/users/:id', (req, res) => {
-// 	const secretMessage = `This is a secret message for ${req.user.email}`;
-// 	console.log(`SecretMessage in endpoint ${secretMessage}`);
-// 	res.status(200).json({ secretMessage });
-// });
 
 //? all clinics and name + openingHOurs query 
 app.get('/clinics', async (req, res) => {
@@ -259,9 +247,12 @@ app.post('/clinics', async (req, res) => {
     }
 });
 
+//? user review endpoint
+app.post('/reviews', authenticateUser)
 app.post('/reviews', async (req, res) => {
+  const user = req.user
   const { reception, time, recommendation, createdAt } = req.body
-  const review = new Review({ reception, time, recommendation, createdAt });
+  const review = new Review({ user, reception, time, recommendation, createdAt });
   try {
     const savedReview = await review.save();
     res.status(200).json(savedReview);
@@ -273,8 +264,8 @@ app.post('/reviews', async (req, res) => {
   // app.post('/reviews/clinic/:id', authenticateUser);
   // app.post('/reviews/clinic/:id', async (req, res) => {
   //   const { clinic } = req.params
-  //   const { reception, time, helpful, recommendation, createdAt } = req.body
-  //   const review = new Review({ clinic, reception, time, helpful, recommendation, createdAt });
+  //   const { reception, time, recommendation, createdAt } = req.body
+  //   const review = new Review({ clinic, reception, time, recommendation, createdAt });
   //   try {
   //     const savedReview = await review.save();
   //     res.status(200).json(savedReview);

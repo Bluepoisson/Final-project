@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './reviewForm.css';
-
-// import ClinicsList from '../clinics/ClinicsList'
-// import RadioTime from './testimonials/questions/RadioTime'
-// import RadioRec from './testimonials/questions/RadioRec'
-// import RadioNeeds from './testimonials/questions/RadioNeeds'
 
 
 const Review = () => {
   const REVIEW_URL = 'http://localhost:8080/reviews'
+
+  const dispatch = useDispatch();
+  const accessToken = useSelector((store) => store.user.login.accessToken);
 
   const [reception, setReception] = useState('');
   const [time, setTime] = useState('');
@@ -25,7 +23,7 @@ const Review = () => {
         fetch(REVIEW_URL, {
           method: 'POST',
           body: JSON.stringify({ reception, time, recommendation }),
-          headers: { 'Content-Type': 'application/json'},
+          headers: { 'Content-Type': 'application/json', Authorization: accessToken},
         })
         .then((res) => {
           if (!res.ok) {
