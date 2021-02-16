@@ -90,11 +90,15 @@ const clinicSchema = new mongoose.Schema({
 });
 
 const reviewSchema = new mongoose.Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    // required: true
+  userId: { 
+    type: String,
+    required: true,
   },
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   // required: true
+  // },
     clinic: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Clinic',
@@ -249,41 +253,19 @@ app.post('/clinics', async (req, res) => {
     }
 });
 
-//? user review endpoint
-app.post('/reviews', authenticateUser)
-app.post('/reviews/', async (req, res) => {
-  const user = req.user
-  const { reception, time, recommendation, createdAt } = req.body
-  const review = new Review({  user, reception, time, recommendation, createdAt });
-
+// //? user review restricted endpoint
+app.get('/reviews', authenticateUser)
+app.get('/reviews/', async (req, res) => {
+  const UserId = req.params.id
+  const userReviews = await Review.find({ entryById: UserId})
   try {
-    const savedReview = await review.save();
-    res.status(200).json(savedReview);
+    res.status(200).json(userReviews);
   } catch (err) {
-    res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
+    res.status(400).json({ message: 'Bad request. Could not get review from the database', error: err.errors });
   }
 });
 
-
-
-// //? user review endpoint w/ clinic
-// app.post('/clinics/:id/reviews', authenticateUser)
-// app.post('/clinics/:id/reviews', async (req, res) => {
-
-//   const clinicId = req.params.id
-
-//   const { reception, time, recommendation, createdAt } = req.body
-//   const review = new Review({  clinicId, user, reception, time, recommendation, createdAt });
-
-//   try {
-//     const savedReview = await review.save();
-//     res.status(200).json(savedReview);
-//   } catch (err) {
-//     res.status(400).json({ message: 'Bad request. Could not save review to the database', error: err.errors });
-//   }
-// });
-
-
+// //? user review restricted endpoint w/ clinic
   app.post('/reviews/:clinicId', authenticateUser);
   app.post('/reviews/:clinicId', async (req, res) => {
     const user = req.user
