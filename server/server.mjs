@@ -85,8 +85,7 @@ const clinicSchema = new mongoose.Schema({
   },
   rating:{
     type: Number
-  }
-  
+  },
 });
 
 const reviewSchema = new mongoose.Schema({
@@ -198,6 +197,22 @@ app.post('/sessions', async (req, res) => {
   }
 });
 
+//? all clinics user restricted endpoint
+// app.get('/clinics', authenticateUser)
+// app.get('/clinics', async (req, res) => {
+
+//   const { name, opening_hours } = req.query;
+//   try {
+//     if(allClinics) { 
+//     res.status(200).json(allClinics);
+//     } else {
+//       res.status(404).json({ error: 'Data not found' })
+//     }
+//     }  catch (err) {
+//       res.status(404).json({ message: 'Page not found', error: err.errors })
+//     }
+   
+// });
 
 //? all clinics inc. name + openingHOurs query 
 app.get('/clinics', async (req, res) => {
@@ -209,7 +224,7 @@ app.get('/clinics', async (req, res) => {
     if(name){
       const regExName = escapeStringRegexp(name);
         allClinics = await Clinic.find({ name: { $regex: regExName } });
-        // console.log(regExname `this is regeexname`);
+        console.log(regExname `this is regeexname`);
     }  else if(opening_hours) {
       const regExOpenHours = escapeStringRegexp(opening_hours);
       allClinics = await Clinic.find({ opening_hours: { $regex: regExOpenHours } });
@@ -257,7 +272,7 @@ app.post('/clinics', async (req, res) => {
 app.get('/reviews', authenticateUser)
 app.get('/reviews/', async (req, res) => {
   const UserId = req.params.id
-  const userReviews = await Review.find({ entryById: UserId})
+  const userReviews = await Review.find({ reviewById: UserId})
   try {
     res.status(200).json(userReviews);
   } catch (err) {
@@ -268,11 +283,15 @@ app.get('/reviews/', async (req, res) => {
 // //? user review restricted endpoint w/ clinic
   app.post('/reviews/:clinicId', authenticateUser);
   app.post('/reviews/:clinicId', async (req, res) => {
-    const user = req.user
+    const user = req.user._id
+   console.log(user);
     const clinicId = req.params.clinicId
-    const clinic = await Clinic.findById(clinicId)
+    const clinic = await Clinic.findById(clinicId);
+    console.log(clinicId);
     const { reception, time, recommendation, createdAt } = req.body
-    const review = new Review({  user, clinic, reception, time, recommendation, createdAt });
+    console.log(req.body);
+    const review = new Review({ userId: user, clinic, reception, time, recommendation, createdAt });
+    console.log(review);
     try {
       const savedReview = await review.save();
       res.status(200).json(savedReview);
