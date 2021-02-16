@@ -17,11 +17,11 @@ const Review = () => {
  
 
   const getClinic = () => {
-    const CLINIC_URL = `http://localhost:8080/clinics/`; 
+    const CLINIC_URL = 'http://localhost:8080/clinics/'; 
 
     fetch(CLINIC_URL, { 
       method: 'GET',
-      headers: { "Content-Type": "application/json"}
+      headers: { "Content-Type": "application/json", Authorization: accessToken}
     })
       .then(res => res.json())
       .then(data => setClinicList(data))
@@ -30,7 +30,7 @@ const Review = () => {
 
   useEffect(() => {
     getClinic(clinicList);
-  }, [clinicList]);
+  }, []);
 
   const postReview = () => {
     const REVIEW_URL = `http://localhost:8080/reviews/${clinic}`
@@ -57,6 +57,7 @@ const Review = () => {
       e.preventDefault();
       postReview();
     }
+
 
       return (
         <>

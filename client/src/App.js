@@ -9,6 +9,7 @@ import MapContainer from './components/map/MapContainer';
 import LoginForm  from "./components/login/LoginForm";
 import SignupForm  from "./components/signup/SignUp";
 
+import SearchClinic from "./components/search/SearchClinic"
 import ClinicsList from "./components/clinics/ClinicsList"
 import ReviewForm  from "./components/survey/ReviewForm";
 import MyReviews  from "./components/myReviews/MyReviews";
@@ -32,12 +33,14 @@ export const App = () => {
    
             {/* <Routing /> */}
             <Route exact path="/" component={StartPage} />
+            <Route exact path="/map" component={MapContainer} />
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/review" component={ReviewForm} />
+            <Route exact path="/register" component={SignupForm} />
             <Route exact path="/my_reviews" component={MyReviews} />
-            <Route exact path="/map" component={MapContainer} />
             <Route exact path="/clinics" component={ClinicsList}/>
-           <Route exact path="/register" component={SignupForm} />
+            <Route exact path="/search" component={SearchClinic}/>
+         
   
         </Switch>
         </main>

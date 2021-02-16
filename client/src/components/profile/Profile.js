@@ -50,6 +50,10 @@ const Profile = () => {
     history.push(`/my_reviews`)
   }
 
+  const reDirectSearch = () => {
+    history.push(`/search`)
+  }
+
   
 
   if (!accessToken) {
@@ -60,9 +64,10 @@ const Profile = () => {
       <Nav />
       <div className="container-profile">
         <h2>Profile</h2>
-         <button className="btn"type="submit" onClick={reDirectClinics} value="Review">Clinics</button>
+        <button className="btn"type="submit" onClick={reDirectSearch} value="Search">Search</button>
+         <button className="btn"type="submit" onClick={reDirectClinics} value="Clinics">Clinics</button>
          <button className="btn"type="submit" onClick={reDirectReview} value="Review">Review</button>
-          <button className="btn"type="submit" onClick={reDirectMyReviews} value="Review">My reviews</button>
+          <button className="btn"type="submit" onClick={reDirectMyReviews} value="myReviews">My reviews</button>
            <button className="btn-logout" type="submit" onClick={handleLogout} value="Logout">Sign out</button>
       </div>
      
