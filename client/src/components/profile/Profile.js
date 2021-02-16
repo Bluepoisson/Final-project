@@ -1,17 +1,13 @@
+
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom"
 import { user } from '../reducers/user'
 
-
 import { SearchClinic } from '../search/SearchClinic';
-
 import Nav from '../header/Nav';
 
-
 import './profileStyles.css';
-
-
 
 const Profile = () => {
   
@@ -23,7 +19,6 @@ const Profile = () => {
   // const statusMessage = useSelector((store) => store.user.login.statusMessage);
 
   // const PROFILE_URL = `http://localhost:8080/users/${userId}`;
- 
 
   const loginSuccess = (loginResponse) => {
     dispatch(
@@ -51,6 +46,12 @@ const Profile = () => {
     history.push(`/clinics`)
   }
 
+  const reDirectMyReviews = () => {
+    history.push(`/my_reviews`)
+  }
+
+  
+
   if (!accessToken) {
     return <div className="err-text" value={loginFailed}>Couldn't log in</div>
   } 
@@ -60,11 +61,9 @@ const Profile = () => {
       <div className="container-profile">
         <h2>Profile</h2>
          <button className="btn"type="submit" onClick={reDirectClinics} value="Review">Clinics</button>
-          <button className="btn"type="submit" onClick={reDirectReview} value="Review">Review</button>
+         <button className="btn"type="submit" onClick={reDirectReview} value="Review">Review</button>
+          <button className="btn"type="submit" onClick={reDirectMyReviews} value="Review">My reviews</button>
            <button className="btn-logout" type="submit" onClick={handleLogout} value="Logout">Sign out</button>
-      {/* <ReviewForm /> */}
-      <SearchClinic />
-      {/* <ClinicsList /> */}
       </div>
      
   </>

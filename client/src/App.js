@@ -11,6 +11,7 @@ import SignupForm  from "./components/signup/SignUp";
 
 import ClinicsList from "./components/clinics/ClinicsList"
 import ReviewForm  from "./components/survey/ReviewForm";
+import MyReviews  from "./components/myReviews/MyReviews";
 
 
 import { user } from "./components/reducers/user";
@@ -33,6 +34,7 @@ export const App = () => {
             <Route exact path="/" component={StartPage} />
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/review" component={ReviewForm} />
+            <Route exact path="/my_reviews" component={MyReviews} />
             <Route exact path="/map" component={MapContainer} />
             <Route exact path="/clinics" component={ClinicsList}/>
            <Route exact path="/register" component={SignupForm} />

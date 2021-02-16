@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+
 
 import './reviewForm.css';
 
 
 const Review = () => {
-
-  const dispatch = useDispatch();
+  
   const accessToken = useSelector((store) => store.user.login.accessToken);
 
   const [reception, setReception] = useState('');
@@ -29,9 +29,8 @@ const Review = () => {
   } 
 
   useEffect(() => {
-    getClinic();
-  }, []);
-
+    getClinic(clinicList);
+  }, [clinicList]);
 
   const postReview = () => {
     const REVIEW_URL = `http://localhost:8080/reviews/${clinic}`
@@ -77,9 +76,12 @@ const Review = () => {
                         onChange={(e) => setClinic(e.target.value)}
                         required
                         >
-
                          { clinicList && clinicList.map(clinic => (
-                          <option value={clinic._id}>{clinic.name}</option>
+                          <option 
+                            key={clinic._id}
+                            value={clinic._id}>
+                            {clinic.name}
+                            </option>
                          )) 
                          };
                          

@@ -114,8 +114,9 @@ export const LoginForm = () => {
     </section>
   </>
   );
-};
-  return <Profile />
+  } else {
+    return <Profile />
+  }
 }
 
 export default LoginForm;
