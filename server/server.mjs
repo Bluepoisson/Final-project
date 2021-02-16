@@ -224,12 +224,12 @@ app.get('/clinics', async (req, res) => {
     if(name){
       const regExName = escapeStringRegexp(name);
         allClinics = await Clinic.find({ name: { $regex: regExName } });
-        console.log(regExname `this is regeexname`);
-    }  else if(opening_hours) {
+
+    }  /*else if(opening_hours) {
       const regExOpenHours = escapeStringRegexp(opening_hours);
       allClinics = await Clinic.find({ opening_hours: { $regex: regExOpenHours } });
       // console.log(regExOpenHours `this is regexopenh`);
-    } else {
+    }*/ else {
       allClinics = await Clinic.find(req.query);
     }
 
@@ -240,9 +240,9 @@ app.get('/clinics', async (req, res) => {
     }
     } catch (err) {
       res.status(404).json({ message: 'Page not found', error: err.errors })
+      console.log(err);
     }
 });
-
 //? single clinic endpoint
 app.get('/clinics/:id', async (req, res) => { 
   try {
