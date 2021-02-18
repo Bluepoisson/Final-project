@@ -17,7 +17,7 @@ import BackArrow from '../lib/BackArrow';
     .then(res => res.json())
     .then(data => setMyReviews(data))
     .catch(err => console.log("Caught an error:", err))
-  }, [])
+  }, )
 
 
     return (

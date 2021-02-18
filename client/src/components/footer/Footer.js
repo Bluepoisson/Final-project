@@ -1,5 +1,5 @@
 import React from 'react';
-import { instagram } from '@iconify/react';
+// import { instagram } from '@iconify/react';
 
 export const Footer = () => {
 
@@ -7,11 +7,11 @@ export const Footer = () => {
     <footer>
     <div className="nav-container">
       <ul >
-        <li >
+        {/* <li >
           <a href="https://instagram.com"></a>
             <img src="" alt="" />
         </li>
-      </ul>
+      
       <li >
           <a href="https://instagram.com"></a>
             <img src={instagram} alt="" />
@@ -19,7 +19,8 @@ export const Footer = () => {
         <li >
           <a href="https://instagram.com"></a>
             <img src="" alt="" />
-        </li>
+        </li> */}
+        </ul>
       </div>
     </footer>
     

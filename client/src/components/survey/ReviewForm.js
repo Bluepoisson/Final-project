@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 
 import './reviewForm.css';
 
 
-const Review = () => {
+ const Review = () => {
   
   const accessToken = useSelector((store) => store.user.login.accessToken);
 
@@ -17,40 +17,46 @@ const Review = () => {
  
 
   const getClinic = () => {
+    
     const CLINIC_URL = 'http://localhost:8080/clinics/'; 
 
+  
     fetch(CLINIC_URL, { 
       method: 'GET',
-      headers: { "Content-Type": "application/json", Authorization: accessToken}
+      headers: { "Content-Type": "application/json"}
     })
       .then(res => res.json())
       .then(data => setClinicList(data))
       .catch(err => console.log("Caught an error:", err))
-  } 
+    };
 
-  useEffect(() => {
-    getClinic(clinicList);
-  }, []);
+// useEffect(() => {
+//   getClinic(clinicList)
+// }, );
+    const handleGetClinic = (e) => {
+      e.preventDefault();
+      getClinic()
+    }
 
   const postReview = () => {
     const REVIEW_URL = `http://localhost:8080/reviews/${clinic}`
 
  
-        fetch(REVIEW_URL, {
-          method: 'POST',
-          body: JSON.stringify({ reception, time, recommendation }),
-          headers: { 'Content-Type': 'application/json', Authorization: accessToken},
-        })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error('Posting review failed');
-          }
-          else {
-            return res.json();
-          }
-        })
-            .catch(err => console.log("Caught an error:", err)) 
-        } 
+    fetch(REVIEW_URL, {
+      method: 'POST',
+      body: JSON.stringify({ reception, time, recommendation }),
+      headers: { 'Content-Type': 'application/json', Authorization: accessToken},
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Posting review failed');
+      }
+      else {
+        return res.json();
+      }
+    })
+        .catch(err => console.log("Caught an error:", err)) 
+    } 
  
 
     const handleSubmit = (e) => {
@@ -76,6 +82,7 @@ const Review = () => {
                         value={clinic}
                         onChange={(e) => setClinic(e.target.value)}
                         required
+                        onClick={handleGetClinic}
                         >
                          { clinicList && clinicList.map(clinic => (
                           <option 
@@ -85,10 +92,9 @@ const Review = () => {
                             </option>
                          )) 
                          };
-                         
                       </select>
-                    </div>
-                </fieldset>
+                </div>
+              </fieldset>
               <fieldset>
                 <div className="question-card">
                   <h3 className="question-header" tabIndex="0">How did you experience the reception?</h3>
@@ -145,4 +151,4 @@ const Review = () => {
     );
   }
 
-  export default Review;
+export default Review;

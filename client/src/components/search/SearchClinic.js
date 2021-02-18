@@ -26,7 +26,6 @@ export const SearchClinic = () => {
   const submitSearch = (e) => {
     e.preventDefault();
     onSearch();
-    
   }
 
   return (

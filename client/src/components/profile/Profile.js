@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from "react-router-dom"
 import { user } from '../reducers/user'
 
-import { SearchClinic } from '../search/SearchClinic';
+
 import Nav from '../header/Nav';
 
 import './profileStyles.css';
@@ -14,47 +14,36 @@ const Profile = () => {
   const dispatch = useDispatch()
   const accessToken = useSelector((store) => store.user.login.accessToken)
   const history = useHistory()
-  // const userId = useSelector((store) => store.user.login.userId)
-  // const secretMessage = useSelector((store) => store.user.login.secretMessage);
-  // const statusMessage = useSelector((store) => store.user.login.statusMessage);
 
-  // const PROFILE_URL = `http://localhost:8080/users/${userId}`;
+  // const loginSuccess = (loginResponse) => {
+  //     dispatch(
+  //       user.actions.setStatusMessage({
+  //         statusMessage: loginResponse.statusMessage,
+  //       }));
+  //   };
 
-  const loginSuccess = (loginResponse) => {
-    dispatch(
-      user.actions.setStatusMessage({
-        statusMessage: loginResponse.statusMessage,
-      }));
-  };
+    const loginFailed = (loginError) => {
+      dispatch(user.actions.setStatusMessage({ statusMessage: loginError }));
+    };
 
-  const loginFailed = (loginError) => {
-    dispatch(user.actions.setStatusMessage({ statusMessage: loginError }));
-  };
-
-  const handleLogout = () => {
-		dispatch(user.actions.logout);
-		dispatch(user.actions.toggleLoggedState(false));
-		window.location.href = '/';
-	};
-
- 
-  const reDirectReview = () => {
-    history.push(`/review`)
-  }
-
-  const reDirectClinics = () => {
-    history.push(`/clinics`)
-  }
-
-  const reDirectMyReviews = () => {
-    history.push(`/my_reviews`)
-  }
-
-  const reDirectSearch = () => {
-    history.push(`/search`)
-  }
+    const handleLogout = () => {
+      dispatch(user.actions.logout);
+      dispatch(user.actions.toggleLoggedState(false));
+      window.location.href = '/';
+    };
 
   
+    const reDirectReview = () => {
+      history.push(`/review`)
+    }
+
+    const reDirectClinics = () => {
+      history.push(`/clinics`)
+    }
+
+    const reDirectMyReviews = () => {
+      history.push(`/my_reviews`)
+    }
 
   if (!accessToken) {
     return <div className="err-text" value={loginFailed}>Couldn't log in</div>
@@ -64,7 +53,6 @@ const Profile = () => {
       <Nav />
       <div className="container-profile">
         <h2>Profile</h2>
-        <button className="btn"type="submit" onClick={reDirectSearch} value="Search">Search</button>
          <button className="btn"type="submit" onClick={reDirectClinics} value="Clinics">Clinics</button>
          <button className="btn"type="submit" onClick={reDirectReview} value="Review">Review</button>
           <button className="btn"type="submit" onClick={reDirectMyReviews} value="myReviews">My reviews</button>

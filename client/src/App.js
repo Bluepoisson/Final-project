@@ -3,7 +3,7 @@ import  { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
-// import { Routing } from './components/route/Routing'
+
 import StartPage from './pages/startpage/StartPage'
 import MapContainer from './components/map/MapContainer';
 import LoginForm  from "./components/login/LoginForm";
@@ -30,8 +30,7 @@ export const App = () => {
        <BrowserRouter>
        <main className='section'>
         <Switch>
-   
-            {/* <Routing /> */}
+  
             <Route exact path="/" component={StartPage} />
             <Route exact path="/map" component={MapContainer} />
             <Route exact path="/login" component={LoginForm} />
