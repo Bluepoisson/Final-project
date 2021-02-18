@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { uuid } from 'uuidv4';
 
+import Nav from '../header/Nav'
 import './searchClinicStyles.css';
 
 export const SearchClinic = () => {
@@ -29,7 +30,8 @@ export const SearchClinic = () => {
   }
 
   return (
-  
+    <>
+      <Nav />
     <form className="search-container" onSubmit={submitSearch}>
       <input 
         value={search}
@@ -42,13 +44,13 @@ export const SearchClinic = () => {
       <input className="submit-btn" type="submit" value="Search" />
       {clinicDetails && clinicDetails.map(clinic => (
         // <p>{clinic.name}</p>
-        <ul className="clinic-search">
-        <li key={uuid}>{clinic.name}</li>
+        <div className="search-output">
+        <p key={uuid}>{clinic.name}</p>
         
-        </ul>
+        </div>
       ))}
     </form>
-  
+  </>
   )
 }
 

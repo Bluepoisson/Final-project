@@ -20,7 +20,7 @@ code {
 		monospace;
 }
 
-.section::before {
+/* .section::before {
 	content: '';
 	position: absolute;
 	top: 30%;
@@ -29,4 +29,4 @@ code {
 	width: 400px;
 	background: linear-gradient(#f00, #f0f);
 	border-radius: 50%;
-}
+} */

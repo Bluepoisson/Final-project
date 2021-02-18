@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 
@@ -30,13 +30,14 @@ import './reviewForm.css';
       .catch(err => console.log("Caught an error:", err))
     };
 
-// useEffect(() => {
-//   getClinic(clinicList)
-// }, );
-    const handleGetClinic = (e) => {
-      e.preventDefault();
-      getClinic()
-    }
+useEffect(() => {
+  getClinic(clinicList)
+}, []);
+
+    // const handleGetClinic = (e) => {
+    //   e.preventDefault();
+    //   getClinic()
+    // }
 
   const postReview = () => {
     const REVIEW_URL = `http://localhost:8080/reviews/${clinic}`
@@ -61,7 +62,7 @@ import './reviewForm.css';
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      postReview();
+      postReview('');
     }
 
 
@@ -82,7 +83,7 @@ import './reviewForm.css';
                         value={clinic}
                         onChange={(e) => setClinic(e.target.value)}
                         required
-                        onClick={handleGetClinic}
+                        // onClick={handleGetClinic}
                         >
                          { clinicList && clinicList.map(clinic => (
                           <option 
