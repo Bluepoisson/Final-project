@@ -4,7 +4,6 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import crypto from 'crypto';
 import bcrypt from 'bcrypt';
-// import dotenv from 'dotenv';
 import listEndpoints from 'express-list-endpoints';
 import escapeStringRegexp from 'escape-string-regexp';
 
@@ -12,9 +11,6 @@ import { createRequire } from 'module';
 //! could not import clinics-data from './data/clinics-data.json' because of type error json was not recognized. Deconstructing worked.
 const require = createRequire(import.meta.url);
 const clinicsData = require('./data/clinics-data.json');
-
-
-// dotenv.config();
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/finalProject';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });

@@ -33,7 +33,6 @@
     "save": "^2.4.0"
   },
   "devDependencies": {
-    "dotenv": "*",
     "eslint": "^7.18.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-import": "^0.13.0"
