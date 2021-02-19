@@ -6,7 +6,8 @@ import BackArrow from '../assets/BackArrow';
 
  const MyReviews = () => {
   const accessToken = useSelector((store) => store.user.login.accessToken);
-  const MYREVIEWS_URL = 'http://localhost:8080/reviews';
+  const MYREVIEWS_URL = "https://sick-project.herokuapp.com/reviews";
+  // 'http://localhost:8080/reviews';
   const [myReviews, setMyReviews] = useState('');
 
   useEffect(() => {

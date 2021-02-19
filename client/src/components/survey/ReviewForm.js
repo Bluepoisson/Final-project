@@ -18,7 +18,8 @@ import './reviewForm.css';
 
   const getClinic = () => {
     
-    const CLINIC_URL = 'http://localhost:8080/clinics/'; 
+    const CLINIC_URL = 'https://sick-project.herokuapp.com/clinics/';
+    // 'http://localhost:8080/clinics/'; 
 
   
     fetch(CLINIC_URL, { 
@@ -40,7 +41,8 @@ useEffect(() => {
     // }
 
   const postReview = () => {
-    const REVIEW_URL = `http://localhost:8080/reviews/${clinic}`
+    const REVIEW_URL = `https://sick-project.herokuapp.com/reviews/${clinic}`;
+    // `http://localhost:8080/reviews/${clinic}`;
 
  
     fetch(REVIEW_URL, {

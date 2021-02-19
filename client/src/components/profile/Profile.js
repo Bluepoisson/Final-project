@@ -15,13 +15,6 @@ const Profile = () => {
   const accessToken = useSelector((store) => store.user.login.accessToken)
   const history = useHistory()
 
-  // const loginSuccess = (loginResponse) => {
-  //     dispatch(
-  //       user.actions.setStatusMessage({
-  //         statusMessage: loginResponse.statusMessage,
-  //       }));
-  //   };
-
     const loginFailed = (loginError) => {
       dispatch(user.actions.setStatusMessage({ statusMessage: loginError }));
     };

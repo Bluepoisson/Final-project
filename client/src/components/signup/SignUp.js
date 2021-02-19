@@ -14,7 +14,8 @@ const styles = {
 }
 
  const SignupForm = () => {
-	const SIGNUP_URL = 'http://localhost:8080/users';
+	const SIGNUP_URL = 'https://sick-project.herokuapp.com/users';
+	// 'http://localhost:8080/users';
   const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState("")

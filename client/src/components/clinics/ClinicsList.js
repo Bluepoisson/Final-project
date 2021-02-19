@@ -6,9 +6,9 @@ import BackArrow from '../assets/BackArrow';
 
 const ClinicsList = () => {
   const [clinics, setClinics] = useState([]);
-  
+ 
   useEffect(() => {
-  fetch("http://localhost:8080/clinics", {
+  fetch("https://sick-project.herokuapp.com/clinics", {
   method: "GET",
   headers: { "Content-Type": "application/json" },
 })

@@ -11,7 +11,8 @@ import Profile from '../profile/Profile';
 import BackArrow from '../assets/BackArrow';
 
 
-const LOGIN_URL = 'http://localhost:8080/sessions';
+const LOGIN_URL = 'https://sick-project.herokuapp.com/sessions';
+// 'http://localhost:8080/sessions';
 
 
 export const LoginForm = () => {

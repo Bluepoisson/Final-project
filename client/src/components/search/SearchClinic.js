@@ -9,8 +9,9 @@ export const SearchClinic = () => {
   const [search, setSearch] = useState('')
   
   const onSearch = () => {
-    const CLINIC_URL = `http://localhost:8080/clinics?name=${search}`;
-
+    const CLINIC_URL =`https://sick-project.herokuapp.com/clinics?name=${search}`;
+    // `http://localhost:8080/clinics?name=${search}`;
+    
     fetch(CLINIC_URL, { 
       method: 'GET',
       headers: { "Content-Type": "application/json" }
