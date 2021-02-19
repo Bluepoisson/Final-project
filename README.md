@@ -17,3 +17,31 @@ Alternatively, if you don't want a new git repo on your account;
 1. Open the directory in the terminal: `cd /path/to/react-starter`
 1. Install required dependencies with npm: `npm install`
 1. Start the project: `npm start`
+
+//! render current position
+{/_ <GoogleMap
+mapContainerStyle={mapStyles}
+zoom={13}
+center={currentPosition}>
+{
+currentPosition.lat &&
+(
+<Marker position={currentPosition}
+)
+}
+<GoogleMap/> _/}
+
+//! render draggable marker
+{/_ <GoogleMap
+mapContainerStyle={mapStyles}
+zoom={13}
+center={currentPosition}>
+{
+currentPosition.lat ?
+<Marker
+position={currentPosition}
+onDragEnd={(e) => onMarkerDragEnd(e)}
+draggable={true} /> :
+null
+}
+</GoogleMap> _/}

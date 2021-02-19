@@ -1,12 +1,11 @@
 {
-  "name": "sickadvisor-server",
+  "name": "final-project-server",
   "version": "1.0.0",
   "description": "Map app",
   "repository": "https://github.com/Bluepoisson/Final-project.git",
   "scripts": {
     "start": "babel-node server.mjs",
-    "dev": "nodemon server.mjs --exec babel-node",
-    "troll": "echo $HERO"
+    "dev": "nodemon server.mjs --exec babel-node"
   },
   "author": "Nadia Mazzoni",
   "license": "ISC",

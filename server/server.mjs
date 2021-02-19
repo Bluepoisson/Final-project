@@ -93,11 +93,6 @@ const reviewSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // user: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   // required: true
-  // },
     clinic: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Clinic',
@@ -152,7 +147,6 @@ const port = process.env.PORT || 8080;
 const app = express();
 
 
-
 app.use(cors())
 app.use(bodyParser.json())
 
@@ -197,23 +191,6 @@ app.post('/sessions', async (req, res) => {
   }
 });
 
-//? all clinics user restricted endpoint
-// app.get('/clinics', authenticateUser)
-// app.get('/clinics', async (req, res) => {
-
-//   const { name, opening_hours } = req.query;
-//   try {
-//     if(allClinics) { 
-//     res.status(200).json(allClinics);
-//     } else {
-//       res.status(404).json({ error: 'Data not found' })
-//     }
-//     }  catch (err) {
-//       res.status(404).json({ message: 'Page not found', error: err.errors })
-//     }
-   
-// });
-
 //? all clinics inc. name + openingHOurs query 
 app.get('/clinics', async (req, res) => {
 
@@ -223,13 +200,9 @@ app.get('/clinics', async (req, res) => {
   try {
     if(name){
       const regExName = escapeStringRegexp(name);
-        allClinics = await Clinic.find({ name: { $regex: regExName } });
+        allClinics = await Clinic.find({ name: { $regex: regExName.toUpperCase() } });
 
-    }  /*else if(opening_hours) {
-      const regExOpenHours = escapeStringRegexp(opening_hours);
-      allClinics = await Clinic.find({ opening_hours: { $regex: regExOpenHours } });
-      // console.log(regExOpenHours `this is regexopenh`);
-    }*/ else {
+    } else {
       allClinics = await Clinic.find(req.query);
     }
 
@@ -243,6 +216,7 @@ app.get('/clinics', async (req, res) => {
       console.log(err);
     }
 });
+
 //? single clinic endpoint
 app.get('/clinics/:id', async (req, res) => { 
   try {
