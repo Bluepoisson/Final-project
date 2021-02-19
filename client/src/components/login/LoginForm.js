@@ -80,7 +80,6 @@ export const LoginForm = () => {
 		  <BackArrow />
 		</Link>
     <section className="login-form">
-       {/* <img src={waitroom} alt="Logo"/> */}
       <form className="container">
       <h1>Please Log in</h1>
         <div className="form-control">

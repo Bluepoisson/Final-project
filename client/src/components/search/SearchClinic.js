@@ -44,7 +44,6 @@ export const SearchClinic = () => {
       />
       <input className="submit-btn" type="submit" value="Search" />
       {clinicDetails && clinicDetails.map(clinic => (
-        // <p>{clinic.name}</p>
         <div className="search-output">
         <p key={uuid}>{clinic.name}</p>
         
